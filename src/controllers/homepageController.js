@@ -91,7 +91,7 @@ let handleMessage =async (sender_psid, message) => {
         return
     }
     let entity = handleMessageWithEntities(message);
-    if (entity.name === "wit$datetime:datetime") {
+    if (entity.name === "wit$greetings") {
         //handle quick reply message: asking about the party size , how many people
 
 
