@@ -229,8 +229,9 @@ let sendLunchMenu = (sender_psid) => {
         }
     });
 };
-let sendAppetizers = (sender_psid) => {
+let sendAppetizer = (sender_psid) => {
     return new Promise(async (resolve, reject) => {
+        try {
             let response = {
                 "attachment": {
                     "type": "template",
@@ -283,9 +284,11 @@ let sendAppetizers = (sender_psid) => {
 
             await sendTypingOn(sender_psid);
             await sendMessage(sender_psid, response);
-        
+        } catch (e) {
+            reject(e);
+        }
     });
-};
+}
 
 let backToMainMenu = (sender_psid)=>{
     sendMainMenu (sender_psid)
