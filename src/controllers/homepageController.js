@@ -82,11 +82,14 @@ function firstTrait(nlp, name) {
 let handleMessage =async (sender_psid, message) => {
     //checking if the message is quick reply with options
     if (message && message.quick_reply && message.quick_reply.payload) {
+        response = {
+            "text": `Please send me as asked!`
+        }
         if (message.quick_reply.payload === "SMALL" || message.quick_reply.payload === "MEDIUM" || message.quick_reply.payload === "LARGE") {
-            // await chatBotService.sendMessageAskingPhoneNumber(sender_psid);
             response = {
-                "text": `Please send me as asked!`
+                "text": `Please send me assss asked!`
             }
+            // await chatBotService.sendMessageAskingPhoneNumber(sender_psid);
         return
         }
         return
@@ -196,7 +199,7 @@ let handlePostback = async(sender_psid, received_postback) => {
         await chatBotService.sendMainMenu(sender_psid);
     }
     // Send the message to acknowledge the postbal
-    // callSendAPI(sender_psid, response);
+    callSendAPI(sender_psid, response);
 };
 
 
