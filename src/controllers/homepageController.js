@@ -90,6 +90,10 @@ let handleMessage =async (sender_psid, message) => {
             await chatBotService.sendMessageAskingPhoneNumber(sender_psid);
         
         }
+        if (message.quick_reply.payload !== " ") {
+
+            await chatBotService.sendMessageDoneReserveTable(sender_psid);
+        }
        
     }
 

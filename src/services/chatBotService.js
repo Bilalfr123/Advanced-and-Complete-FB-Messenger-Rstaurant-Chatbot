@@ -372,6 +372,55 @@ let askQuantity = async(sender_psid)=>{
     });
     
 }
+let sendMessageDoneReserveTable = async (sender_psid) => {
+    try {
+        let response = {
+            "attachment": {
+                "type": "image",
+                "payload": {
+                    "url": "https://bit.ly/giftDonalTrump"
+                }
+            }
+        };
+  
+        await sendMessage(sender_psid, response);
+
+        //get facebook username
+        let username = await getFacebookUsername(sender_psid);
+
+        //send another message
+        let response2 = {
+            "attachment": {
+                "type": "template",
+                "payload": {
+                    "template_type": "button",
+                    "text": `Done! \nOur reservation team will contact you as soon as possible ${username}.\n \nWould you like to check our Main Menu?`,
+                    "buttons": [
+                        {
+                            "type": "postback",
+                            "title": "SHOW MAIN MENU",
+                            "payload": "MAIN_MENU"
+                        },
+                        {
+                            "type":"phone_number",
+                            "title":"☎ HOT LINE",
+                            "payload":"+911911"
+                        },
+                        {
+                            "type": "postback",
+                            "title": "START OVER",
+                            "payload": "RESTART_CONVERSATION"
+                        }
+                    ]
+                }
+            }
+        };
+        await sendTypingOn(sender_psid);
+        await sendMessage(sender_psid, response2);
+    } catch (e) {
+        console.log(e);
+    }
+};
 //like call send api
 let sendMessage = (sender_psid, response) => {
     // Construct the message body
@@ -408,5 +457,6 @@ module.exports = {
         sendAppetizers:sendAppetizers,
         handleReservation:handleReservation,
         askQuantity:askQuantity,
-        sendMessageAskingPhoneNumber:sendMessageAskingPhoneNumber
+        sendMessageAskingPhoneNumber:sendMessageAskingPhoneNumber,
+        sendMessageDoneReserveTable:sendMessageDoneReserveTable
 };
