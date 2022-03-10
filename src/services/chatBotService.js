@@ -313,6 +313,19 @@ let sendMessageAskingPhoneNumber = (sender_psid) => {
             ]
         }
     }
+      // Send the HTTP request to the Messenger Platform
+      request({
+        "uri": "https://graph.facebook.com/v6.0/me/messages",
+        "qs": { "access_token": PAGE_ACCESS_TOKEN },
+        "method": "POST",
+        "json": request_body
+    }, (err, res, body) => {
+        if (!err) {
+            console.log('message sent!')
+        } else {
+            console.error("Unable to send message:" + err);
+        }
+    });
     };
 let askQuantity = async(sender_psid)=>{
     let request_body = {
