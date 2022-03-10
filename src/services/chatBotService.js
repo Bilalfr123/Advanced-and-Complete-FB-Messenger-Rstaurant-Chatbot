@@ -262,7 +262,7 @@ try{
                                 "buttons": [
                                     {
                                         "type": "postback",
-                                        "title": "SHOW LUNCH MENU",
+                                        "title": "BACK TO LUNCH MENU",
                                         "payload": "BACK_TO_LUNCH_MENU",
                                     },
                                     {
@@ -287,10 +287,16 @@ try{
         }
     });
 }
-
-let backToMainMenu = (sender_psid)=>{
-    sendMainMenu (sender_psid)
-    
+let handleReserveTable = (username,sender_psid) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+     
+            let response = { text: `Hi ${username}, What time and date you would like to reserve a table ?` };
+            await sendMessage(sender_psid, response);
+        } catch (e) {
+            reject(e);
+        }
+    });
 };
 //like call send api
 let sendMessage = (sender_psid, response) => {
@@ -326,5 +332,5 @@ module.exports = {
         // sendDinnerMenu:sendDinnerMenu,
         // sendPubMenu:sendPubMenu,
         sendAppetizers:sendAppetizers,
-        backToMainMenu:backToMainMenu
+        handleReservation:handleReservation
 };
