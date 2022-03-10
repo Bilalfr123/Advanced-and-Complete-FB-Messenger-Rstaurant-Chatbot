@@ -415,7 +415,6 @@ let sendMessageDoneReserveTable = async (sender_psid) => {
                 }
             }
         };
-        await sendTypingOn(sender_psid);
         await sendMessage(sender_psid, response2);
     } catch (e) {
         console.log(e);
