@@ -79,6 +79,7 @@ function firstTrait(nlp, name) {
   
 // Handles messages events
 let handleMessage =async (sender_psid, message) => {
+    let response;
 let entitiesArr = [ "wit$greetings", "wit$thanks",];
     let entityChosen = "";
     entitiesArr.forEach((name) => {
