@@ -134,7 +134,7 @@ let sendMainMenu = (sender_psid)=>{
          
 
             //send a image with button view main menu
-            await sendMessage(sender_psid, response_second);
+            sendMessage(sender_psid, response_second);
 
             // resolve("done!")
         // } catch (e) {
@@ -222,7 +222,7 @@ let sendLunchMenu = (sender_psid) => {
                     }
                 }
             };
-            await sendMessage(sender_psid, response);
+         sendMessage(sender_psid, response);
             // resolve("done");
         } catch (e) {
             reject(e);
