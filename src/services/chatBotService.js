@@ -298,10 +298,10 @@ let handleReservation = (username,sender_psid) => {
         }
     });
 };
-let sendMessageAskingPhoneNumber = (sender_id) => {
+let sendMessageAskingPhoneNumber = (sender_psid) => {
     let request_body = {
         "recipient": {
-            "id": sender_id
+            "id": sender_psid
         },
         "messaging_type": "RESPONSE",
         "message": {
