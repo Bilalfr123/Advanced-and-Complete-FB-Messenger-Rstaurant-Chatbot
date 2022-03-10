@@ -229,7 +229,7 @@ let sendLunchMenu = (sender_psid) => {
         }
     });
 };
-let sendAppetizer = (sender_psid) => {
+let sendAppetizers = (sender_psid) => {
     return new Promise(async (resolve, reject) => {
             let response = {
                 "attachment": {
