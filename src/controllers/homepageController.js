@@ -110,7 +110,7 @@ let handleMessageWithEntities = (message) => {
     });
 
     data.name = entityChosen;
-    return data;
+    return data
 };
 //     let response;
 // let entitiesArr = [ "wit$greetings", "wit$thanks",];
