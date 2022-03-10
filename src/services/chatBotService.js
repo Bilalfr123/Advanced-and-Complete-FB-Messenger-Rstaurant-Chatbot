@@ -1,4 +1,6 @@
-import request from 'request'
+import request from "request";
+
+require("dotenv").config();
 //to contatcv with fb api get username
 let getFacebookUsername = (sender_psid) => {
     return new Promise((resolve, reject) => {
@@ -11,11 +13,9 @@ let getFacebookUsername = (sender_psid) => {
             if (!err) {
                 //convert string to json object
                 body = JSON.parse(body);
-                let username = `${body.last_name} ${body.first_name} ${body.profile_pic}`;
-                console.log(username)
-                resolve(username)
-            ;} 
-                else {
+                let username = `${body.last_name} ${body.first_name}`;
+                resolve(username);
+            } else {
                 reject("Unable to send message:" + err);
             }
         });
