@@ -19,51 +19,60 @@ let getFacebookUsername = (sender_psid) => {
         });
     });
 };
-let sendResponseWelcomeNewCustomer = async(username,sender_psid)=>{
-return new promise(async(resolve,reject) =>{
-    let response_first = { "text": `Welcome ${username} to Dark's Restaurant` };
-    let response_second = {
-        "attachment": {
-            "type": "template",
-            "payload": {
-                "template_type": "generic",
-                "elements": [
-                    {
-                        "title": "Dark's restaurant",
-                        "subtitle": "My restaurant is legendary, its classic wine collection equally so.",
-                        "image_url": "https://bit.ly/imageToSend",
-                        "buttons": [
+let sendResponseWelcomeNewCustomer = (username, sender_psid) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            let response_first = { "text": `Welcome ${username} to Dark's Restaurant` };
+            let response_second = {
+                "attachment": {
+                    "type": "template",
+                    "payload": {
+                        "template_type": "generic",
+                        "elements": [
                             {
-                                "type": "postback",
-                                "title": "SHOW MAIN MENU",
-                                "payload": "MAIN_MENU",
-                            },
-                            {
-                                "type": "postback",
-                                "title": "RESERVE A TABLE",
-                                "payload": "RESERVE_TABLE",
-                            },
-                            {
-                                "type": "postback",
-                                "title": "GUIDE TO USE THIS BOT",
-                                "payload": "GUIDE_BOT",
-                            }
-                        ],
-                    } ]
-            }
+                                "title": "Dark's restaurant",
+                                "subtitle": "My restaurant is legendary, its classic wine collection equally so.",
+                                "image_url": "https://bit.ly/imageToSend",
+                                "buttons": [
+                                    {
+                                        "type": "postback",
+                                        "title": "SHOW MAIN MENU",
+                                        "payload": "MAIN_MENU",
+                                    },
+                                    {
+                                        "type": "postback",
+                                        "title": "RESERVE A TABLE",
+                                        "payload": "RESERVE_TABLE",
+                                    },
+                                    {
+                                        "type": "postback",
+                                        "title": "GUIDE TO USE THIS BOT",
+                                        "payload": "GUIDE_BOT",
+                                    }
+                                ],
+                            } ]
+                    }
+                }
+            };
+
+            //send a welcome message
+         
+            await sendMessage(sender_psid, response_first);
+
+            //send a image with button view main menu
+            await sendMessage(sender_psid, response_second);
+
+            resolve("done!")
+        } catch (e) {
+            reject(e);
         }
-    }
-              //send a welcome message
-           
-              await sendMessage(sender_psid, response_first);
-  
-              //send a image with button view main menu
-              await sendMessage(sender_psid, response_second);
-})
-}
+
+    });
+};
+
 
 //like call send api
-let sendMessage = (sender_id, response) => {
+let sendMessage = (sender_psid, response) => {
     // Construct the message body
     let request_body = {
         "recipient": {
