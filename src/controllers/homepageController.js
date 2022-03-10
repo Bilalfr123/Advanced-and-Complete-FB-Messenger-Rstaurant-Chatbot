@@ -82,14 +82,11 @@ function firstTrait(nlp, name) {
 let handleMessage =async (sender_psid, message) => {
     //checking if the message is quick reply with options
     if (message && message.quick_reply && message.quick_reply.payload) {
-        response = {
-            "text": `Please send me as asked!`
-        }
+      
         if (message.quick_reply.payload === "SMALL" || message.quick_reply.payload === "MEDIUM" || message.quick_reply.payload === "LARGE") {
-            response = {
-                "text": `Please send me assss asked!`
-            }
+           
             // await chatBotService.sendMessageAskingPhoneNumber(sender_psid);
+            await chatBotService.askQuantity(sender_psid)
         return
         }
         return
