@@ -132,7 +132,7 @@ let handlePostback = async(sender_psid, received_postback) => {
     } else if (payload === 'no') {
         response = { "text": "Oops, try sending another image." }
     }
-     else if (payload === 'GET_STARTED') {
+     else if (payload === 'GET_STARTED_PAYLOAD') {
          let username = await chatBotService.getFacebookUsername(sender_psid)
         response = { "text": `Hi ${username} welcome to our restaurant` }
     }
