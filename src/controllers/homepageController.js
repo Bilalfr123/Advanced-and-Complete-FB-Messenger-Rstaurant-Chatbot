@@ -134,6 +134,7 @@ let handlePostback = async(sender_psid, received_postback) => {
     }
      else if (payload === 'GET_STARTED_PAYLOAD') {
         //  let username = await chatBotService.getFacebookUsername(`${sender_psid}`)
+     await chatBotService.getFacebookUsername()
         response = { "text": `Hi 
         
          welcome to our restaurant` }
