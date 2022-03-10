@@ -143,6 +143,93 @@ let sendMainMenu = (sender_psid)=>{
 
     });
 }
+
+let sendLunchMenu = (sender_psid) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            let response = {
+                "attachment": {
+                    "type": "template",
+                    "payload": {
+                        "template_type": "generic",
+                        "elements": [
+                            {
+                                "title": "Appetizers",
+                                "image_url": "https://bit.ly/imageAppetizer",
+                                "buttons": [
+                                    {
+                                        "type": "postback",
+                                        "title": "SHOW APPETIZERS",
+                                        "payload": "SHOW_APPETIZERS",
+                                    }
+                                ],
+                            },
+
+                            {
+                                "title": "Entree Salad",
+                                "image_url": "https://bit.ly/imageSalad",
+                                "buttons": [
+                                    {
+                                        "type": "postback",
+                                        "title": "SHOW ENTREE SALAD",
+                                        "payload": "SHOW_ENTREE_SALAD",
+                                    }
+                                ],
+                            },
+
+                            {
+                                "title": "Fish and Shell Fish",
+                                "image_url": "https://bit.ly/imageFish",
+                                "buttons": [
+                                    {
+                                        "type": "postback",
+                                        "title": "SHOW FISH",
+                                        "payload": "SHOW_FISH",
+                                    }
+                                ],
+                            },
+
+                            {
+                                "title": "Skeens Classics",
+                                "subtitle": "and Dry-aged on Premise",
+                                "image_url": "https://bit.ly/imageClassics",
+                                "buttons": [
+                                    {
+                                        "type": "postback",
+                                        "title": "SHOW CLASSICS",
+                                        "payload": "SHOW_CLASSICS",
+                                    }
+                                ],
+                            },
+
+                            {
+                                "title": "Go back",
+                                "image_url": " https://bit.ly/imageToSend",
+                                "buttons": [
+                                    {
+                                        "type": "postback",
+                                        "title": "BACK TO MAIN MENU",
+                                        "payload": "BACK_TO_MAIN_MENU",
+                                    },
+                                    {
+                                        "type": "postback",
+                                        "title": "RESERVE A TABLE",
+                                        "payload": "RESERVE_TABLE",
+                                    }
+                                ],
+                            }
+                        ]
+                    }
+                }
+            };
+            await sendMessage(sender_psid, response);
+            resolve("done");
+        } catch (e) {
+            reject(e);
+        }
+    });
+};
+
 //like call send api
 let sendMessage = (sender_psid, response) => {
     // Construct the message body
@@ -172,5 +259,8 @@ let sendMessage = (sender_psid, response) => {
 module.exports = {
         getFacebookUsername:getFacebookUsername,
         sendResponseWelcomeNewCustomer:sendResponseWelcomeNewCustomer,
-        sendMainMenu:sendMainMenu
+        sendMainMenu:sendMainMenu,
+        sendLunchMenu:sendLunchMenu,
+        sendDinnerMenu:sendDinnerMenu,
+        sendPubMenu:sendPubMenu
 };
