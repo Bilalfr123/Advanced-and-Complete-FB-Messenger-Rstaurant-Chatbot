@@ -20,8 +20,9 @@ let getFacebookUsername = (sender_psid) => {
     });
 };
 let sendResponseWelcomeNewCustomer = async(username,sender_psid)=>{
-return new promise((resolve,reject) =>{
-    let response = {
+return new promise(async(resolve,reject) =>{
+    let response_first = { "text": `Welcome ${username} to Dark's Restaurant` };
+    let response_second = {
         "attachment": {
             "type": "template",
             "payload": {
@@ -52,6 +53,18 @@ return new promise((resolve,reject) =>{
             }
         }
     }
+              //send a welcome message
+           
+              await sendMessage(sender_psid, response_first);
+  
+              //send a image with button view main menu
+              await sendMessage(sender_psid, response_second);
+})
+}
+
+//like call send api
+let sendMessage = (sender_psid, response) => {
+    // Construct the message body
     let request_body = {
         "recipient": {
             "id": sender_psid
@@ -72,8 +85,8 @@ return new promise((resolve,reject) =>{
             console.error("Unable to send message:" + err);
         }
     });
-})
-}
+};
+
 
 module.exports = {
         getFacebookUsername:getFacebookUsername,
