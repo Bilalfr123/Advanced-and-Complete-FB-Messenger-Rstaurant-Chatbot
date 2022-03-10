@@ -92,11 +92,15 @@ let handleMessage =async (sender_psid, message) => {
         }
         return
     }
+    let response;
     const greeting = firstTrait(message.nlp, 'wit$phone_number:phone_number');
     if (greeting && greeting.confidence > 0.8) {
         await chatBotService.askQuantity(sender_psid)
     } else { 
       // default logic
+      response = {
+                                        "text": `Please send me correct info as asked!`
+                                    }
     }
 //     let response;
 // let entitiesArr = [ "wit$greetings", "wit$thanks",];
