@@ -161,15 +161,6 @@ let handlePostback = async(sender_psid, received_postback) => {
      else if (payload === "SHOW_APPETIZERS"){
         await chatBotService.sendAppetizers(sender_psid);
     }
-     else if (payload === 'PUB_MENU') {
-        await chatBotService.sendPubMenu(sender_psid);
-    }
-     else if (payload === 'PUB_MENU') {
-        await chatBotService.sendPubMenu(sender_psid);
-    }
-     else if (payload === 'PUB_MENU') {
-        await chatBotService.sendPubMenu(sender_psid);
-    }
      else if (payload === 'BACK_TO_MAIN_MENU') {
         await chatBotService.backToMainMenu(sender_psid);
     }
