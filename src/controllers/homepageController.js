@@ -127,15 +127,24 @@ let handlePostback = async(sender_psid, received_postback) => {
     let payload = received_postback.payload;
 
     // Set the response based on the postback payload
-    switch (payload) {
-        case "GET_STARTED":
-        case "RESTART_CONVERSATION":
-            //get facebook username
-            let username = await chatBotService.getFacebookUsername(sender_psid);
-            //send welcome response to users
+    // switch (payload) {
+    //     case "GET_STARTED":
+    //     case "RESTART_CONVERSATION":
+       
+    //         break;
+    // }
+    if (payload === 'yes') {
+        response = { "text": "Thanks!" }
+    } else if (payload === 'no') {
+        response = { "text": "Oops, try sending another image." }
+    }
+     else if (payload === 'GET_STARTED_PAYLOAD') {
+          //get facebook username
+          let username = await chatBotService.getFacebookUsername(sender_psid);
+          console.log(username)
+          //send welcome response to users
 
-            await chatBotService.sendResponseWelcomeNewCustomer(username, sender_psid);
-            break;
+          await chatBotService.sendResponseWelcomeNewCustomer(username, sender_psid);
     }
     // Send the message to acknowledge the postbal
     // callSendAPI(sender_psid, response);
