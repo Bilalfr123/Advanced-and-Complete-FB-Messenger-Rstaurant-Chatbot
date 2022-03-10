@@ -75,48 +75,33 @@ let postWebhook = (req, res) => {
 };
 
 // Handles messages events
-let handleMessage = (sender_psid, received_message) => {
-    let response;
-
-    // Checks if the message contains text
-    if (received_message.text) {
-        // Create the payload for a basic text message, which
-        // will be added to the body of our request to the Send API
-        response = {
-            "text": `You sent the message: "${received_message.text}". Now send me an attachment!`
+let handleMessage =async (sender_psid, received_message) => {
+let entitiesArr = [ "wit$greetings", "wit$thanks",];
+    let entityChosen = "";
+    entitiesArr.forEach((name) => {
+        let entity = firstTrait(message.nlp, name);
+        if (entity && entity.confidence > 0.8) {
+            entityChosen = name;
         }
-    } else if (received_message.attachments) {
-        // Get the URL of the message attachment
-        let attachment_url = received_message.attachments[0].payload.url;
+    });
+
+    if(entityChosen === ""){
+        //default
         response = {
-            "attachment": {
-                "type": "template",
-                "payload": {
-                    "template_type": "generic",
-                    "elements": [{
-                        "title": "Is this the right picture?",
-                        "subtitle": "Tap a button to answer.",
-                        "image_url": attachment_url,
-                        "buttons": [
-                            {
-                                "type": "postback",
-                                "title": "Yes!",
-                                "payload": "yes",
-                            },
-                            {
-                                "type": "postback",
-                                "title": "No!",
-                                "payload": "no",
+                                "text": `Please send me correct info as asked!`
                             }
-                        ],
-                    }]
-                }
-            }
+    }else{
+       if(entityChosen === "wit$greetings"){
+await chatBotService.askQuantity(sender_psid)
+       }
+       if(entityChosen === "wit$thanks"){
+           //send thanks message
+           response = {
+            "text": `You are welcome! `
         }
     }
-
-    // Send the response message
-    callSendAPI(sender_psid, response);
+}
+ callSendAPI(sender_psid, response);
 };
 
 // Handles messaging_postbacks events
@@ -170,6 +155,15 @@ let handlePostback = async(sender_psid, received_postback) => {
     }
      else if (payload === 'BACK_TO_MAIN_MENU') {
         await chatBotService.sendMainMenu(sender_psid);
+    }
+     else if (payload === 'SMALL') {
+        await chatBotService.askPhoneNumber(sender_psid);
+    }
+     else if (payload === 'MEDIUM') {
+        await chatBotService.askPhoneNumber(sender_psid);
+    }
+     else if (payload === 'LARGE') {
+        await chatBotService.askPhoneNumber(sender_psid);
     }
     // Send the message to acknowledge the postbal
     // callSendAPI(sender_psid, response);

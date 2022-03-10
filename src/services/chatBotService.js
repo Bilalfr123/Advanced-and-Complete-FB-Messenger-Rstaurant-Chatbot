@@ -298,6 +298,62 @@ let handleReservation = (username,sender_psid) => {
         }
     });
 };
+let askPhoneNumber = (username,sender_psid) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+     
+            let response = { text: `Alright whats your phone number ?` };
+            await sendMessage(sender_psid, response);
+        } catch (e) {
+            reject(e);
+        }
+    });
+};
+let askQuantity = async(sender_psid)=>{
+    let request_body = {
+        "recipient":{
+            "id":sender_psid
+          },
+          "messaging_type": "RESPONSE",
+          "message":{
+            "text": "Your party size ?:",
+            "quick_replies":[
+              {
+                "content_type":"text",
+                "title":"1-2",
+                "payload":"SMALL",
+                "image_url":"http://example.com/img/red.png"
+              },{
+                "content_type":"text",
+                "title":"4-5",
+                "payload":"MEDIUM",
+                "image_url":"http://example.com/img/green.png"
+              }
+              ,{
+                "content_type":"text",
+                "title":"9-10",
+                "payload":"LARGE",
+                "image_url":"http://example.com/img/green.png"
+              }
+            ]
+          }
+    };
+
+    // Send the HTTP request to the Messenger Platform
+    request({
+        "uri": "https://graph.facebook.com/v6.0/me/messages",
+        "qs": { "access_token": PAGE_ACCESS_TOKEN },
+        "method": "POST",
+        "json": request_body
+    }, (err, res, body) => {
+        if (!err) {
+            console.log('message sent!')
+        } else {
+            console.error("Unable to send message:" + err);
+        }
+    });
+    
+}
 //like call send api
 let sendMessage = (sender_psid, response) => {
     // Construct the message body
@@ -332,5 +388,7 @@ module.exports = {
         // sendDinnerMenu:sendDinnerMenu,
         // sendPubMenu:sendPubMenu,
         sendAppetizers:sendAppetizers,
-        handleReservation:handleReservation
+        handleReservation:handleReservation,
+        askQuantity:askQuantity,
+        askPhoneNumber:askPhoneNumber
 };
