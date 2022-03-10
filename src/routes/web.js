@@ -8,7 +8,7 @@ let initWebRoutes = (app) => {
     router.get("/", homepageController.getHomepage);
     router.get("/webhook", homepageController.getWebhook);
     router.post("/webhook", homepageController.postWebhook);
-
+    router.post("/setup", homepageController.handleSetupInfor); //persistent menu
     return app.use("/", router);
 };
 

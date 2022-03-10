@@ -222,5 +222,6 @@ let callSendAPI = (sender_psid, response) => {
 module.exports = {
     getHomepage: getHomepage,
     getWebhook: getWebhook,
-    postWebhook: postWebhook
+    postWebhook: postWebhook,
+    handleSetupInfor:handleSetupInfor,
 };
