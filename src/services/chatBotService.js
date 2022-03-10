@@ -63,7 +63,7 @@ return new promise(async(resolve,reject) =>{
 }
 
 //like call send api
-let sendMessage = (sender_psid, response) => {
+let sendMessage = (sender_id, response) => {
     // Construct the message body
     let request_body = {
         "recipient": {
