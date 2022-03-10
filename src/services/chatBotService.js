@@ -287,7 +287,7 @@ try{
         }
     });
 }
-let handleReserveTable = (username,sender_psid) => {
+let handleReservation = (username,sender_psid) => {
     return new Promise(async (resolve, reject) => {
         try {
      
