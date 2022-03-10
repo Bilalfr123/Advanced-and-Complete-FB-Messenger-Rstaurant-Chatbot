@@ -88,46 +88,37 @@ let handleMessage =async (sender_psid, message) => {
         if (message.quick_reply.payload === "SMALL" || message.quick_reply.payload === "MEDIUM" || message.quick_reply.payload === "LARGE") {
            
             await chatBotService.sendMessageAskingPhoneNumber(sender_psid);
-        return
+        
         }
-        return
+       
     }
-    let response;
-    const greeting = firstTrait(message.nlp, 'wit$phone_number:phone_number');
-    if (greeting && greeting.confidence > 0.8) {
-        await chatBotService.askQuantity(sender_psid)
-    } else { 
-      // default logic
-      response = {
-                                        "text": `Please send me correct info as asked!`
-                                    }
-    }
-//     let response;
-// let entitiesArr = [ "wit$greetings", "wit$thanks",];
-//     let entityChosen = "";
-//     entitiesArr.forEach((name) => {
-//         let entity = firstTrait(message.nlp, name);
-//         if (entity && entity.confidence > 0.8) {
-//             entityChosen = name;
-//         }
-//     });
 
-//     if(entityChosen === ""){
-//         //default
-//         response = {
-//                                 "text": `Please send me correct info as asked!`
-//                             }
-//     }else{
-//        if(entityChosen === "wit$greetings"){
-// await chatBotService.askQuantity(sender_psid)
-//        }
-//        if(entityChosen === "wit$thanks"){
-//            //send thanks message
-//            response = {
-//             "text": `You are welcome! `
-//         }
-//     }
-// }
+    let response;
+let entitiesArr = [ "wit$greetings", "wit$thanks",];
+    let entityChosen = "";
+    entitiesArr.forEach((name) => {
+        let entity = firstTrait(message.nlp, name);
+        if (entity && entity.confidence > 0.8) {
+            entityChosen = name;
+        }
+    });
+
+    if(entityChosen === ""){
+        //default
+        response = {
+                                "text": `Please send me correct info as asked!`
+                            }
+    }else{
+       if(entityChosen === "wit$greetings"){
+await chatBotService.askQuantity(sender_psid)
+       }
+       if(entityChosen === "wit$thanks"){
+           //send thanks message
+           response = {
+            "text": `You are welcome! `
+        }
+    }
+}
  callSendAPI(sender_psid, response);
 };
 
