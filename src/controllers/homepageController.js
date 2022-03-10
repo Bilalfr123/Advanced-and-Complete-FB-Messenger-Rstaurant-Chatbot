@@ -88,13 +88,13 @@ let handleMessage =async (sender_psid, message) => {
         if (message.quick_reply.payload === "SMALL" || message.quick_reply.payload === "MEDIUM" || message.quick_reply.payload === "LARGE") {
            
             await chatBotService.sendMessageAskingPhoneNumber(sender_psid);
-        
+        return
         }
         if (message.quick_reply.payload !== " ") {
 
             await chatBotService.sendMessageDoneReserveTable(sender_psid);
         }
-       
+       return
     }
 
     let response;
