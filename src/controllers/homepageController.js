@@ -134,36 +134,13 @@ let handlePostback = async(sender_psid, received_postback) => {
     }
      else if (payload === 'GET_STARTED_PAYLOAD') {
         //  let username = await chatBotService.getFacebookUsername(`${sender_psid}`)
-     let user = await getFacebookUsername(sender_psid)
-     console.log(user)
-        response = { "text": `Hi 
-        
-         welcome to our restaurant` }
+     let username = await chatBotService.getFacebookUsername(sender_psid)
+        response = { "text": `Hi ${username} welcome to our restaurant` }
     }
     // Send the message to acknowledge the postbal
     callSendAPI(sender_psid, response);
 };
-let getFacebookUsername = (sender_psid) => {
-    return new Promise((resolve, reject) => {
-        // Send the HTTP request to the Messenger Platform
-        let uri = `https://graph.facebook.com/${sender_psid}?fields=first_name,last_name,profile_pic&access_token=${PAGE_ACCESS_TOKEN}`;
-        request({
-            "uri": uri,
-            "method": "GET",
-        }, (err, res, body) => {
-            if (!err) {
-                //convert string to json object
-                body = JSON.parse(body);
-                let username = `${body.last_name} ${body.first_name} ${body.profile_pic}`;
-                console.log(username)
-                resolve(username)
-            ;} 
-                else {
-                reject("Unable to send message:" + err);
-            }
-        });
-    });
-};
+
 let handleSetupInfor =async (req,res)=>{
     //call fb api
 
