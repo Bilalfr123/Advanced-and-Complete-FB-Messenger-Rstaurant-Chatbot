@@ -229,7 +229,68 @@ let sendLunchMenu = (sender_psid) => {
         }
     });
 };
+let sendAppetizer = (sender_psid) => {
+    return new Promise(async (resolve, reject) => {
+            let response = {
+                "attachment": {
+                    "type": "template",
+                    "payload": {
+                        "template_type": "generic",
+                        "elements": [
+                            {
+                                "title": "Little Neck Clams on the Half Shell",
+                                "subtitle": "Dozen - $20.00",
+                                "image_url": "https://bit.ly/appetizers1",
+                            },
 
+                            {
+                                "title": "Fresh Oysters",
+                                "subtitle": "1/2 Dozen - $21.00 | Dozen - $40.00",
+                                "image_url": "https://bit.ly/appetizers2",
+                            },
+
+                            {
+                                "title": "Lobster Salad",
+                                "subtitle": "Half Lobster with Avocado and Grapefruit",
+                                "image_url": "https://bit.ly/appetizers3",
+                            },
+
+                            {
+                                "title": "Go back",
+                                "image_url": " https://bit.ly/imageToSend",
+                                "buttons": [
+                                    {
+                                        "type": "postback",
+                                        "title": "SHOW LUNCH MENU",
+                                        "payload": "BACK_TO_LUNCH_MENU",
+                                    },
+                                    {
+                                        "type": "postback",
+                                        "title": "BACK TO MAIN MENU",
+                                        "payload": "BACK_TO_MAIN_MENU",
+                                    },
+                                    {
+                                        "type": "postback",
+                                        "title": "RESERVE A TABLE",
+                                        "payload": "RESERVE_TABLE",
+                                    }
+                                ],
+                            }
+                        ]
+                    }
+                }
+            };
+
+            await sendTypingOn(sender_psid);
+            await sendMessage(sender_psid, response);
+        
+    });
+};
+
+let backToMainMenu = (sender_psid)=>{
+    sendMainMenu (sender_psid)
+    
+};
 //like call send api
 let sendMessage = (sender_psid, response) => {
     // Construct the message body
@@ -254,54 +315,6 @@ let sendMessage = (sender_psid, response) => {
         }
     });
 };
-let backToMainMenu = (sender_psid)=>{
-    return new Promise(async (resolve, reject) => {
-        try {
-          
-            let response = {
-                "attachment": {
-                    "type": "template",
-                    "payload": {
-                        "template_type": "generic",
-                        "elements": [
-                            {
-                                "title": "Dark's restaurant",
-                                "subtitle": "My restaurant is legendary, its classic wine collection equally so.",
-                                "image_url": "https://bit.ly/imageToSend",
-                                "buttons": [
-                                    {
-                                        "type": "postback",
-                                        "title": "SHOW MAIN MENU",
-                                        "payload": "MAIN_MENU",
-                                    },
-                                    {
-                                        "type": "postback",
-                                        "title": "RESERVE A TABLE",
-                                        "payload": "RESERVE_TABLE",
-                                    },
-                                    {
-                                        "type": "postback",
-                                        "title": "GUIDE TO USE THIS BOT",
-                                        "payload": "GUIDE_BOT",
-                                    }
-                                ],
-                            } ]
-                    }
-                }
-            };
-
-            //send a welcome message
-         
-            //send a image with button view main menu
-            await sendMessage(sender_psid, response);
-
-            resolve("done!")
-        } catch (e) {
-            reject(e);
-        }
-
-    });
-};
 
 
 module.exports = {
@@ -311,5 +324,6 @@ module.exports = {
         sendLunchMenu:sendLunchMenu,
         // sendDinnerMenu:sendDinnerMenu,
         // sendPubMenu:sendPubMenu,
+        sendAppetizers:sendAppetizers,
         backToMainMenu:backToMainMenu
 };
