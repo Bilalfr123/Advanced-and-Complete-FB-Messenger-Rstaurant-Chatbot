@@ -72,8 +72,8 @@ let sendResponseWelcomeNewCustomer = (username, sender_psid) => {
 };
 
 let sendMainMenu = (sender_psid)=>{
-    // return new Promise(async (resolve, reject) => {
-        // try {
+    return new Promise(async (resolve, reject) => {
+        try {
             let response_second = {
                 "attachment": {
                     "type": "template",
@@ -136,16 +136,16 @@ let sendMainMenu = (sender_psid)=>{
             //send a image with button view main menu
             sendMessage(sender_psid, response_second);
 
-            // resolve("done!")
-        // } catch (e) {
-        //     reject(e);
-        // }
+            resolve("done!")
+        } catch (e) {
+            reject(e);
+        }
 
-    // });
+    });
 }
 
 let sendLunchMenu = (sender_psid) => {
-
+    return new Promise(async (resolve, reject) => {
         try {
             let response = {
                 "attachment": {
@@ -223,15 +223,15 @@ let sendLunchMenu = (sender_psid) => {
                 }
             };
          sendMessage(sender_psid, response);
-            // resolve("done");
+            resolve("done");
         } catch (e) {
             reject(e);
         }
-    // });
+    });
 };
 let sendAppetizers = (sender_psid) => {
     return new Promise(async (resolve, reject) => {
-
+try{
             let response = {
                 "attachment": {
                     "type": "template",
@@ -282,6 +282,9 @@ let sendAppetizers = (sender_psid) => {
                 }
             };
             await sendMessage(sender_psid, response);
+        }catch(e){
+            reject(e)
+        }
     });
 }
 
