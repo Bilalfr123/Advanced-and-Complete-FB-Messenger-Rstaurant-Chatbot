@@ -254,6 +254,54 @@ let sendMessage = (sender_psid, response) => {
         }
     });
 };
+let backToMainMenu = (sender_psid)=>{
+    return new Promise(async (resolve, reject) => {
+        try {
+          
+            let response = {
+                "attachment": {
+                    "type": "template",
+                    "payload": {
+                        "template_type": "generic",
+                        "elements": [
+                            {
+                                "title": "Dark's restaurant",
+                                "subtitle": "My restaurant is legendary, its classic wine collection equally so.",
+                                "image_url": "https://bit.ly/imageToSend",
+                                "buttons": [
+                                    {
+                                        "type": "postback",
+                                        "title": "SHOW MAIN MENU",
+                                        "payload": "MAIN_MENU",
+                                    },
+                                    {
+                                        "type": "postback",
+                                        "title": "RESERVE A TABLE",
+                                        "payload": "RESERVE_TABLE",
+                                    },
+                                    {
+                                        "type": "postback",
+                                        "title": "GUIDE TO USE THIS BOT",
+                                        "payload": "GUIDE_BOT",
+                                    }
+                                ],
+                            } ]
+                    }
+                }
+            };
+
+            //send a welcome message
+         
+            //send a image with button view main menu
+            await sendMessage(sender_psid, response);
+
+            resolve("done!")
+        } catch (e) {
+            reject(e);
+        }
+
+    });
+};
 
 
 module.exports = {
@@ -261,6 +309,7 @@ module.exports = {
         sendResponseWelcomeNewCustomer:sendResponseWelcomeNewCustomer,
         sendMainMenu:sendMainMenu,
         sendLunchMenu:sendLunchMenu,
-        sendDinnerMenu:sendDinnerMenu,
-        sendPubMenu:sendPubMenu
+        // sendDinnerMenu:sendDinnerMenu,
+        // sendPubMenu:sendPubMenu,
+        backToMainMenu:backToMainMenu
 };
