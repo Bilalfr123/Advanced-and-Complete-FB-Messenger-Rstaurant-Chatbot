@@ -79,6 +79,19 @@ function firstTrait(nlp, name) {
   
 // Handles messages events
 let handleMessage =async (sender_psid, message) => {
+    //checking if the message is quick reply with options
+    if(message & message.quick_reply && message.quick_reply.payload){
+   if ( message.quick_reply.payload === 'SMALL') {
+            await chatBotService.askPhoneNumber(sender_psid);
+        
+        }
+  else if ( message.quick_reply.payload === 'MEDIUM') {
+            await chatBotService.askPhoneNumber(sender_psid);
+        }
+
+        return
+    }
+    
     let response;
 let entitiesArr = [ "wit$greetings", "wit$thanks",];
     let entityChosen = "";
@@ -160,13 +173,7 @@ let handlePostback = async(sender_psid, received_postback) => {
      else if (payload === 'BACK_TO_MAIN_MENU') {
         await chatBotService.sendMainMenu(sender_psid);
     }
-     else if (payload === 'SMALL') {
-        await chatBotService.askPhoneNumber(sender_psid);
-    }
-     else if (payload === 'MEDIUM') {
-        await chatBotService.askPhoneNumber(sender_psid);
-    }
-     else if (payload === 'LARGE') {
+    else if ( message.quick_reply.payload === 'LARGE') {
         await chatBotService.askPhoneNumber(sender_psid);
     }
     // Send the message to acknowledge the postbal
