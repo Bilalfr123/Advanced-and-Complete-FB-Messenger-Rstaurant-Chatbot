@@ -133,10 +133,10 @@ let handlePostback = async(sender_psid, received_postback) => {
         response = { "text": "Oops, try sending another image." }
     }
      else if (payload === 'GET_STARTED_PAYLOAD') {
-         let username = await chatBotService.getFacebookUsername(sender_psid)
+         let username = await chatBotService.getFacebookUsername(`${sender_psid}`)
         response = { "text": `Hi ${username} welcome to our restaurant` }
     }
-    // Send the message to acknowledge the postback
+    // Send the message to acknowledge the postbal
     callSendAPI(sender_psid, response);
 };
 let handleSetupInfor =async (req,res)=>{
@@ -171,7 +171,8 @@ let handleSetupInfor =async (req,res)=>{
             ]
         }
     ],  "whitelisted_domains":[
-        "https://dark1233.herokuapp.com",
+        "https://dark-restaurant-bot.herokuapp.com/",
+
  
     ]
    };
