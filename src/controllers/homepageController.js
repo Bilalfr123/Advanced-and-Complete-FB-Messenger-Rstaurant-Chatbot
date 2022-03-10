@@ -146,10 +146,13 @@ let handlePostback = async(sender_psid, received_postback) => {
 
           await chatBotService.sendResponseWelcomeNewCustomer(username, sender_psid);
     }
+     else if (payload === 'MAIN_MENU') {
+        await chatBotService.sendMainMenu(sender_psid);
+    }
     // Send the message to acknowledge the postbal
     // callSendAPI(sender_psid, response);
 };
-//to contatcv with fb api get username
+
 
 let handleSetupInfor =async (req,res)=>{
     //call fb api
