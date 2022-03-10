@@ -118,9 +118,7 @@ await chatBotService.askQuantity(sender_psid)
        }
        if(entityChosen === "wit$thanks"){
            //send thanks message
-           response = {
-            "text": `You are welcome! `
-        }
+           await chatBotService.sendMessageDoneReserveTable(sender_psid);
     }
 }
  callSendAPI(sender_psid, response);
