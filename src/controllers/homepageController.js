@@ -146,6 +146,9 @@ let handlePostback = async(sender_psid, received_postback) => {
 
           await chatBotService.sendResponseWelcomeNewCustomer(username, sender_psid);
     }
+    else if (payload === 'MAIN_MENU') {
+       await chatBotService.sendMainMenu(sender_psid);
+   }
      else if (payload === 'LUNCH_MENU') {
         await chatBotService.sendLunchMenu(sender_psid);
     }
