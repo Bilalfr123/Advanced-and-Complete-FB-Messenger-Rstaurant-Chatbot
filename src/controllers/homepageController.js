@@ -90,55 +90,56 @@ let handleMessage =async (sender_psid, message) => {
         }
         return
     }
-    let entity = handleMessageWithEntities(message);
-    if (entity.name === "wit$greetings") {
-        //handle quick reply message: asking about the party size , how many people
+
+//     let entity = handleMessageWithEntities(message);
+//     if (entity.name === "wit$greetings") {
+//         //handle quick reply message: asking about the party size , how many people
 
 
-        await chatBotService.askQuantity(sender_psid)
-    } 
-let handleMessageWithEntities = (message) => {
-    let entitiesArr = [ "wit$datetime:datetime", "wit$phone_number:phone_number", "wit$greetings", "wit$thanks", "wit$bye" ];
-    let entityChosen = "";
-    let data = {}; // data is an object saving value and name of the entity.
-    entitiesArr.forEach((name) => {
-        let entity = firstTrait(message.nlp, name.trim());
-        if (entity && entity.confidence > 0.8) {
-            entityChosen = name;
-            data.value = entity.value;
-        }
-    });
-
-    data.name = entityChosen;
-    return data
-};
-//     let response;
-// let entitiesArr = [ "wit$greetings", "wit$thanks",];
+//         await chatBotService.askQuantity(sender_psid)
+//     } 
+// let handleMessageWithEntities = (message) => {
+//     let entitiesArr = [ "wit$datetime:datetime", "wit$phone_number:phone_number", "wit$greetings", "wit$thanks", "wit$bye" ];
 //     let entityChosen = "";
+//     let data = {}; // data is an object saving value and name of the entity.
 //     entitiesArr.forEach((name) => {
-//         let entity = firstTrait(message.nlp, name);
+//         let entity = firstTrait(message.nlp, name.trim());
 //         if (entity && entity.confidence > 0.8) {
 //             entityChosen = name;
+//             data.value = entity.value;
 //         }
 //     });
 
-//     if(entityChosen === ""){
-//         //default
-//         response = {
-//                                 "text": `Please send me correct info as asked!`
-//                             }
-//     }else{
-//        if(entityChosen === "wit$greetings"){
-// await chatBotService.askQuantity(sender_psid)
-//        }
-//        if(entityChosen === "wit$thanks"){
-//            //send thanks message
-//            response = {
-//             "text": `You are welcome! `
-//         }
-//     }
-// }
-//  callSendAPI(sender_psid, response);
+//     data.name = entityChosen;
+//     return data
+// };
+    let response;
+let entitiesArr = [ "wit$greetings", "wit$thanks",];
+    let entityChosen = "";
+    entitiesArr.forEach((name) => {
+        let entity = firstTrait(message.nlp, name);
+        if (entity && entity.confidence > 0.8) {
+            entityChosen = name;
+        }
+    });
+
+    if(entityChosen === ""){
+        //default
+        response = {
+                                "text": `Please send me correct info as asked!`
+                            }
+    }else{
+       if(entityChosen === "wit$greetings"){
+await chatBotService.askQuantity(sender_psid)
+       }
+       if(entityChosen === "wit$thanks"){
+           //send thanks message
+           response = {
+            "text": `You are welcome! `
+        }
+    }
+}
+ callSendAPI(sender_psid, response);
 };
 
 // Handles messaging_postbacks events
