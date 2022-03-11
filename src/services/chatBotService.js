@@ -314,7 +314,7 @@ let showRoomDetail = (sender_psid) => {
                 "attachment": {
                     "type": "image",
                     "payload": {
-                        "url": URL_SHOW_ROOM_GIF
+                        "url":  " https://bit.ly/imageToSend" //add gif
                     }
                 }
             };
