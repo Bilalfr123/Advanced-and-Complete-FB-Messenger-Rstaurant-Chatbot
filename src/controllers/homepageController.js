@@ -138,6 +138,7 @@ let handlePostback = async(sender_psid, received_postback) => {
        
     //         break;
     // }
+    await chatBotService.sendTypingOn(sender_psid);
     if (payload === 'yes') {
         response = { "text": "Thanks!" }
     } else if (payload === 'no') {
