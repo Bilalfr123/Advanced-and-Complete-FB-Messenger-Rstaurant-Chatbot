@@ -83,6 +83,7 @@ function firstTrait(nlp, name) {
 // Handles messages events
 let handleMessage =async (sender_psid, message) => {
     //checking if the message is quick reply with options
+    await chatBotService.sendTypingOn(sender_psid);
     if (message && message.quick_reply && message.quick_reply.payload) {
       
         if (message.quick_reply.payload === "SMALL" || message.quick_reply.payload === "MEDIUM" || message.quick_reply.payload === "LARGE") {
