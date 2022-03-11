@@ -162,7 +162,9 @@ let handlePostback = async(sender_psid, received_postback) => {
      else if (payload === 'GET_STARTED_PAYLOAD') {
           //get facebook username
           let username = await chatBotService.getFacebookUsername(sender_psid);
+          console.log(username)
           user.name = username;
+          console.log(user.name)
           //send welcome response to users
 
           await chatBotService.sendResponseWelcomeNewCustomer(username, sender_psid);
