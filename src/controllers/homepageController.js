@@ -151,6 +151,10 @@ let handlePostback = async(sender_psid, received_postback) => {
 
           await chatBotService.sendResponseWelcomeNewCustomer(username, sender_psid);
     }
+     else if (payload === 'RESTART_CONVERSATION') {
+        let username = await chatBotService.getFacebookUsername(sender_psid);
+          await chatBotService.sendResponseWelcomeNewCustomer(username, sender_psid);
+    }
     else if (payload === 'MAIN_MENU') {
        await chatBotService.sendMainMenu(sender_psid);
    }
@@ -184,7 +188,7 @@ let handlePostback = async(sender_psid, received_postback) => {
 let handleSetupInfor =async (req,res)=>{
     //call fb api
 
-     // Send the HTTP request to the Messenger Platform
+     // Send the HTTP request to  Messenger Platform
    let request_body = {
     "get_started":{
         "payload":"GET_STARTED_PAYLOAD"
