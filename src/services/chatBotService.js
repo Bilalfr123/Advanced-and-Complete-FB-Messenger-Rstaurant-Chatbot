@@ -410,6 +410,140 @@ try{
         }
     });
 }
+let sendSalad = (sender_psid) => {
+    return new Promise(async (resolve, reject) => {
+        try{
+            let response1 = {
+                "attachment": {
+                    "type": "image",
+                    "payload": {
+                        "url": 'https://bit.ly/imageToSend'
+                    }
+                }
+            };
+            let response2 = {
+                "attachment": {
+                    "type": "template",
+                    "payload": {
+                        "template_type": "button",
+                        "text": `Entree Salad \n$25.00`,
+                        "buttons": [
+                            {
+                                "type": "postback",
+                                "title": "SHOW MAIN MENU",
+                                "payload": "MAIN_MENU"
+                            },
+                            {
+                                "type": "postback",
+                                "title": "RESERVE A TABLE",
+                                "payload": "RESERVE_TABLE",
+                            }
+                        ]
+                    }
+                }
+            };
+
+            await sendTypingOn(sender_psid);
+            await sendMessage(sender_psid, response1);
+            await sendTypingOn(sender_psid);
+            await sendMessage(sender_psid, response2);
+
+            resolve("done");
+        }catch (e) {
+            reject(e);
+        }
+    });
+};
+
+let sendFish = (sender_psid) => {
+    return new Promise(async (resolve, reject) => {
+        try{
+            let response1 = {
+                "attachment": {
+                    "type": "image",
+                    "payload": {
+                        "url": 'https://bit.ly/imageToSend'
+                    }
+                }
+            };
+            let response2 = {
+                "attachment": {
+                    "type": "template",
+                    "payload": {
+                        "template_type": "button",
+                        "text": `Fish fry \n$60.00`,
+                        "buttons": [
+                            {
+                                "type": "postback",
+                                "title": "SHOW MAIN MENU",
+                                "payload": "MAIN_MENU"
+                            },
+                            {
+                                "type": "postback",
+                                "title": "RESERVE A TABLE",
+                                "payload": "RESERVE_TABLE",
+                            }
+                        ]
+                    }
+                }
+            };
+
+            await sendTypingOn(sender_psid);
+            await sendMessage(sender_psid, response1);
+            await sendTypingOn(sender_psid);
+            await sendMessage(sender_psid, response2);
+
+            resolve("done");
+        }catch (e) {
+            reject(e);
+        }
+    });
+};
+
+let sendClassic = (sender_psid) => {
+    return new Promise(async (resolve, reject) => {
+        try{
+            let response1 = {
+                "attachment": {
+                    "type": "image",
+                    "payload": {
+                        "url": 'https://bit.ly/imageToSend'
+                    }
+                }
+            };
+            let response2 = {
+                "attachment": {
+                    "type": "template",
+                    "payload": {
+                        "template_type": "button",
+                        "text": `Perfect oven baked fries \n$30.00`,
+                        "buttons": [
+                            {
+                                "type": "postback",
+                                "title": "SHOW MAIN MENU",
+                                "payload": "MAIN_MENU"
+                            },
+                            {
+                                "type": "postback",
+                                "title": "RESERVE A TABLE",
+                                "payload": "RESERVE_TABLE",
+                            }
+                        ]
+                    }
+                }
+            };
+
+            await sendTypingOn(sender_psid);
+            await sendMessage(sender_psid, response1);
+            await sendTypingOn(sender_psid);
+            await sendMessage(sender_psid, response2);
+
+            resolve("done");
+        }catch (e) {
+            reject(e);
+        }
+    });
+};
 let handleReservation = (username,sender_psid) => {
     return new Promise(async (resolve, reject) => {
         try {
@@ -676,6 +810,9 @@ module.exports = {
         // sendDinnerMenu:sendDinnerMenu,
         // sendPubMenu:sendPubMenu,
         sendAppetizers:sendAppetizers,
+        sendSalad:sendSalad,
+        sendFish:sendFish,
+        sendClassic:sendClassic,
         handleReservation:handleReservation,
         askQuantity:askQuantity,
         sendMessageAskingPhoneNumber:sendMessageAskingPhoneNumber,

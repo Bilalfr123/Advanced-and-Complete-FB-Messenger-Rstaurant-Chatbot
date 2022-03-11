@@ -195,6 +195,15 @@ let handlePostback = async(sender_psid, received_postback) => {
      else if (payload === "SHOW_APPETIZERS"){
         await chatBotService.sendAppetizers(sender_psid);
     }
+     else if (payload === "SHOW_ENTREE_SALAD"){
+        await chatBotService.sendSalad(sender_psid);
+    }
+     else if (payload === "SHOW_FISH"){
+        await chatBotService.sendFish(sender_psid);
+    }
+     else if (payload === "SHOW_CLASSICS"){
+        await chatBotService.sendClassic(sender_psid);
+    }
      else if (payload === "RESERVE_TABLE"){
         let username = await chatBotService.getFacebookUsername(sender_psid);
         await chatBotService.handleReservation(username,sender_psid);
@@ -204,6 +213,9 @@ let handlePostback = async(sender_psid, received_postback) => {
     }
      else if (payload === 'BACK_TO_MAIN_MENU') {
         await chatBotService.sendMainMenu(sender_psid);
+    }
+    else{
+        console.log('err with if else statemnt payload')
     }
     // Send the message to acknowledge the postbal
     callSendAPI(sender_psid, response);
