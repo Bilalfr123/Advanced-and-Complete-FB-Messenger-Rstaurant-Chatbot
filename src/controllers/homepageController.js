@@ -8,7 +8,13 @@ const PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
 let getHomepage = (req, res) => {
     return res.render("homepage.ejs");
 };
-
+let user = {
+    name: "",
+    phoneNumber: "",
+    // time: "",
+    quantity: "",
+    createdAt: ""
+};
 let getWebhook = (req, res) => {
 
     // Your verify token. Should be a random string.
@@ -88,12 +94,18 @@ let handleMessage =async (sender_psid, message) => {
     if (message && message.quick_reply && message.quick_reply.payload) {
       
         if (message.quick_reply.payload === "SMALL" || message.quick_reply.payload === "MEDIUM" || message.quick_reply.payload === "LARGE") {
-           
+            if (message.quick_reply.payload === "SMALL") user.quantity = "1-2 people";
+            if (message.quick_reply.payload === "MEDIUM") user.quantity = "2-5 people";
+            if (message.quick_reply.payload === "LARGE") user.quantity = "More than 5 people";
             await chatBotService.sendMessageAskingPhoneNumber(sender_psid);
         return
         }
         if (message.quick_reply.payload !== " ") {
-
+            user.phoneNumber = message.quick_reply.payload;
+            user.createdAt = moment(Date.now()).zone("+07:00").format('MM/DD/YYYY h:mm A');
+            await chatBotService.sendNotificationToTelegram(user);
+            await chatBotService.markMessageSeen(sender_psid);
+            await chatBotService.sendTypingOn(sender_psid);
             await chatBotService.sendMessageDoneReserveTable(sender_psid);
         }
        return
@@ -150,7 +162,7 @@ let handlePostback = async(sender_psid, received_postback) => {
      else if (payload === 'GET_STARTED_PAYLOAD') {
           //get facebook username
           let username = await chatBotService.getFacebookUsername(sender_psid);
-          console.log(username)
+          user.name = username;
           //send welcome response to users
 
           await chatBotService.sendResponseWelcomeNewCustomer(username, sender_psid);

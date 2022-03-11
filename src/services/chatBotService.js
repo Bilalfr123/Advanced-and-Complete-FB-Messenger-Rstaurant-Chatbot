@@ -508,6 +508,41 @@ let markMessageSeen = (sender_psid) => {
         }
     });
 };
+let sendNotificationToTelegram = (user) => {
+    return new Promise((resolve, reject) => {
+        try {
+            let request_body = {
+                chat_id: process.env.TELEGRAM_GROUP_ID,
+                parse_mode: "HTML",
+                text: `
+| --- <b>A new reservation</b> --- |
+| ------------------------------------------------|
+| 1. Username: <b>${user.name}</b>   |
+| 2. Phone number: <b>${user.phoneNumber}</b> |
+| 4. Quantity: <b>${user.quantity}</b> |
+| 5. Created at: ${user.createdAt} |
+| ------------------------------------------------ |                           
+`
+// | 3. Time: <b>${user.time}</b> |
+            };
+
+            // Send the HTTP request to the Telegram
+            request({
+                "uri": `https://api.telegram.org/bot${process.env.TELEGRAM_BOT_TOKEN}/sendMessage`,
+                "method": "POST",
+                "json": request_body
+            }, (err, res, body) => {
+                if (!err) {
+                    resolve('done!')
+                } else {
+                    reject("Unable to send message:" + err);
+                }
+            });
+        } catch (e) {
+            reject(e);
+        }
+    });
+};
 module.exports = {
         getFacebookUsername:getFacebookUsername,
         sendResponseWelcomeNewCustomer:sendResponseWelcomeNewCustomer,
@@ -521,5 +556,6 @@ module.exports = {
         sendMessageAskingPhoneNumber:sendMessageAskingPhoneNumber,
         sendMessageDoneReserveTable:sendMessageDoneReserveTable,
         sendTypingOn:sendTypingOn,
-        markMessageSeen:markMessageSeen
+        markMessageSeen:markMessageSeen,
+        sendNotificationToTelegram:sendNotificationToTelegram
 };
