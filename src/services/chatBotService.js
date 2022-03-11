@@ -111,12 +111,12 @@ let sendGuideToUseBot = (sender_psid) => {
 
             await chatBotService.sendTypingOn(sender_psid);
             await chatBotService.sendMessage(sender_psid, response1);
-            await chatBotService.sendTypingOn(sender_psid);
-            await chatBotService.sendMessage(sender_psid, response2);
-            await chatBotService.sendTypingOn(sender_psid);
-            await chatBotService.sendMessage(sender_psid, response3);
-            await chatBotService.sendTypingOn(sender_psid);
-            await chatBotService.sendMessage(sender_psid, response5);
+            // await chatBotService.sendTypingOn(sender_psid);
+            // await chatBotService.sendMessage(sender_psid, response2);
+            // await chatBotService.sendTypingOn(sender_psid);
+            // await chatBotService.sendMessage(sender_psid, response3);
+            // await chatBotService.sendTypingOn(sender_psid);
+            // await chatBotService.sendMessage(sender_psid, response5);
 
             resolve("done");
         } catch (e) {
