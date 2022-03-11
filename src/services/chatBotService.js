@@ -229,6 +229,129 @@ let sendLunchMenu = (sender_psid) => {
         }
     });
 };
+let handleShowRooms = (sender_psid) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            let response = {
+                "attachment": {
+                    "type": "template",
+                    "payload": {
+                        "template_type": "generic",
+                        "elements": [
+                            {
+                                "title": "Bull Moose Room",
+                                "subtitle": "The room is suited for parties of up to 25 people",
+                                "image_url": "https://bit.ly/showRoom1",
+                                "buttons": [
+                                    {
+                                        "type": "postback",
+                                        "title": "SHOW DESCRIPTION",
+                                        "payload": "SHOW_ROOM_DETAIL",
+                                    }
+                                ],
+                            },
+
+                            {
+                                "title": "Lillie Langstry Room",
+                                "subtitle": "The room is suited for parties of up to 35 people",
+                                "image_url": "https://bit.ly/showRoom2",
+                                "buttons": [
+                                    {
+                                        "type": "postback",
+                                        "title": "SHOW DESCRIPTION",
+                                        "payload": "SHOW_ROOM_DETAIL",
+                                    }
+                                ],
+                            },
+
+                            {
+                                "title": "Lincoln Room",
+                                "subtitle": "The room is suited for parties of up to 45 people",
+                                "image_url": "https://bit.ly/showRoom3",
+                                "buttons": [
+                                    {
+                                        "type": "postback",
+                                        "title": "SHOW DESCRIPTION",
+                                        "payload": "SHOW_ROOM_DETAIL",
+                                    }
+                                ],
+                            },
+
+                            {
+                                "title": "Go back",
+                                "image_url": " https://bit.ly/imageToSend",
+                                "buttons": [
+                                    {
+                                        "type": "postback",
+                                        "title": "BACK TO MAIN MENU",
+                                        "payload": "BACK_TO_MAIN_MENU",
+                                    },
+                                    {
+                                        "type": "postback",
+                                        "title": "RESERVE A TABLE",
+                                        "payload": "RESERVE_TABLE",
+                                    }
+                                ],
+                            }
+                        ]
+                    }
+                }
+            };
+
+            //send a welcome message
+            await sendTypingOn(sender_psid);
+            await sendMessage(sender_psid, response);
+        } catch (e) {
+            reject(e);
+        }
+    });
+};
+
+let showRoomDetail = (sender_psid) => {
+    return new Promise(async (resolve, reject) => {
+        try{
+            let response1 = {
+                "attachment": {
+                    "type": "image",
+                    "payload": {
+                        "url": URL_SHOW_ROOM_GIF
+                    }
+                }
+            };
+            let response2 = {
+                "attachment": {
+                    "type": "template",
+                    "payload": {
+                        "template_type": "button",
+                        "text": `The rooms is suited for parties up to 45 people.`,
+                        "buttons": [
+                            {
+                                "type": "postback",
+                                "title": "SHOW MAIN MENU",
+                                "payload": "MAIN_MENU"
+                            },
+                            {
+                                "type": "postback",
+                                "title": "RESERVE A TABLE",
+                                "payload": "RESERVE_TABLE",
+                            }
+                        ]
+                    }
+                }
+            };
+
+            await sendTypingOn(sender_psid);
+            await sendMessage(sender_psid, response1);
+            await sendTypingOn(sender_psid);
+            await sendMessage(sender_psid, response2);
+
+            resolve("done!");
+        }catch (e) {
+            reject(e);
+        }
+    })
+};
+
 let sendAppetizers = (sender_psid) => {
     return new Promise(async (resolve, reject) => {
 try{
@@ -548,6 +671,8 @@ module.exports = {
         sendResponseWelcomeNewCustomer:sendResponseWelcomeNewCustomer,
         sendMainMenu:sendMainMenu,
         sendLunchMenu:sendLunchMenu,
+        handleShowRooms:handleShowRooms,
+        showRoomDetail:showRoomDetail,
         // sendDinnerMenu:sendDinnerMenu,
         // sendPubMenu:sendPubMenu,
         sendAppetizers:sendAppetizers,

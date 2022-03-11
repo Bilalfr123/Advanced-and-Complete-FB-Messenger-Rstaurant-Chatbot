@@ -89,14 +89,15 @@ function firstTrait(nlp, name) {
 // Handles messages events
 let handleMessage =async (sender_psid, message) => {
     //checking if the message is quick reply with options
-    await chatBotService.markMessageSeen(sender_psid);
-    await chatBotService.sendTypingOn(sender_psid);
+    
     if (message && message.quick_reply && message.quick_reply.payload) {
       
         if (message.quick_reply.payload === "SMALL" || message.quick_reply.payload === "MEDIUM" || message.quick_reply.payload === "LARGE") {
             if (message.quick_reply.payload === "SMALL") user.quantity = "1-2 people";
             if (message.quick_reply.payload === "MEDIUM") user.quantity = "2-5 people";
             if (message.quick_reply.payload === "LARGE") user.quantity = "More than 5 people";
+            await chatBotService.markMessageSeen(sender_psid);
+    await chatBotService.sendTypingOn(sender_psid);
             await chatBotService.sendMessageAskingPhoneNumber(sender_psid);
         return
         }
