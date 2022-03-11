@@ -229,6 +229,182 @@ let sendLunchMenu = (sender_psid) => {
         }
     });
 };
+let sendDinnerMenu = (sender_psid) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            let response1 = {
+                "text": "Lump crab cocktail\n$25.00"
+            };
+            let response2 = {
+                "attachment": {
+                    "type": "image",
+                    "payload": {
+                        "url": "https://djfoodie.com/wp-content/uploads/Crab-Cocktail-3-800.jpg"
+                    }
+                }
+            };
+
+            let response3 = {
+                "text": "House cured salmon\n$16.00"
+            };
+            let response4 = {
+                "attachment": {
+                    "type": "image",
+                    "payload": {
+                        "url": "https://www.thespruceeats.com/thmb/rys3IyH2DB6Ma_r4IQ6emN-2jYw=/4494x3000/filters:fill(auto,1)/simple-homemade-gravlax-recipe-2216618_hero-01-592dadcba64743f98aa1f7a14f81d5b4.jpg"
+                    }
+                }
+            };
+
+            let response5 = {
+                "text": "Steamed Whole Maine Lobsters\n$35.00"
+            };
+            let response6 = {
+                "attachment": {
+                    "type": "image",
+                    "payload": {
+                        "url": "https://portcitydaily.com/wp-content/uploads/For-the-Shell-of-It.jpg"
+                    }
+                }
+            };
+
+            let response7 = {
+                "attachment": {
+                    "type": "template",
+                    "payload": {
+                        "template_type": "button",
+                        "text": `Back to main menu or make a reservation ?`,
+                        "buttons": [
+                            {
+                                "type": "postback",
+                                "title": "SHOW MAIN MENU",
+                                "payload": "MAIN_MENU"
+                            },
+                            {
+                                "type": "postback",
+                                "title": "RESERVE A TABLE",
+                                "payload": "RESERVE_TABLE",
+                            }
+                        ]
+                    }
+                }
+            };
+
+            await sendTypingOn(sender_psid);
+            await sendMessage(sender_psid, response1);
+
+            await sendTypingOn(sender_psid);
+            await sendMessage(sender_psid, response2);
+
+            await sendTypingOn(sender_psid);
+            await sendMessage(sender_psid, response3);
+
+            await sendTypingOn(sender_psid);
+            await sendMessage(sender_psid, response4);
+
+            await sendTypingOn(sender_psid);
+            await sendMessage(sender_psid, response5);
+
+            await sendTypingOn(sender_psid);
+            await sendMessage(sender_psid, response6);
+
+            await sendTypingOn(sender_psid);
+            await sendMessage(sender_psid, response7);
+
+            resolve("done");
+        } catch (e) {
+            reject(e);
+        }
+    });
+};
+
+let sendPubMenu = (sender_psid) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            let response1 = {
+                "text": "Hamburger with French Fries\n$19.50"
+            };
+            let response2 = {
+                "attachment": {
+                    "type": "image",
+                    "payload": {
+                        "url": "https://previews.123rf.com/images/genmike/genmike1411/genmike141100010/33951440-burger-and-french-fries.jpg"
+                    }
+                }
+            };
+
+            let response3 = {
+                "text": "Ham and Cheese on a Baguette as Salad or Sandwich\n$21.00"
+            };
+            let response4 = {
+                "attachment": {
+                    "type": "image",
+                    "payload": {
+                        "url": "https://s3-ap-southeast-1.amazonaws.com/v3-live.image.oddle.me/product/Blackforesthamcheesebfd18d.jpg"
+                    }
+                }
+            };
+
+            let response5 = {
+                "text": "Braised short rib salad\n$29.50"
+            };
+            let response6 = {
+                "attachment": {
+                    "type": "image",
+                    "payload": {
+                        "url": "https://www.bbcgoodfood.com/sites/default/files/styles/recipe/public/recipe_images/ribs_0.jpg?itok=bOf0t_NF"
+                    }
+                }
+            };
+
+            let response7 = {
+                "attachment": {
+                    "type": "template",
+                    "payload": {
+                        "template_type": "button",
+                        "text": `Back to main menu or make a reservation ?`,
+                        "buttons": [
+                            {
+                                "type": "postback",
+                                "title": "SHOW MAIN MENU",
+                                "payload": "MAIN_MENU"
+                            },
+                            {
+                                "type": "postback",
+                                "title": "RESERVE A TABLE",
+                                "payload": "RESERVE_TABLE",
+                            }
+                        ]
+                    }
+                }
+            };
+
+            await sendTypingOn(sender_psid);
+            await sendMessage(sender_psid, response1);
+
+            await sendTypingOn(sender_psid);
+            await sendMessage(sender_psid, response2);
+
+            await sendTypingOn(sender_psid);
+            await sendMessage(sender_psid, response3);
+
+            await sendTypingOn(sender_psid);
+            await sendMessage(sender_psid, response4);
+
+            await sendTypingOn(sender_psid);
+            await sendMessage(sender_psid, response5);
+
+            await sendTypingOn(sender_psid);
+            await sendMessage(sender_psid, response6);
+
+            await sendTypingOn(sender_psid);
+            await sendMessage(sender_psid, response7);
+            resolve("done");
+        } catch (e) {
+            reject(e);
+        }
+    });
+};
 let handleShowRooms = (sender_psid) => {
     return new Promise(async (resolve, reject) => {
         try {
@@ -807,8 +983,8 @@ module.exports = {
         sendLunchMenu:sendLunchMenu,
         handleShowRooms:handleShowRooms,
         showRoomDetail:showRoomDetail,
-        // sendDinnerMenu:sendDinnerMenu,
-        // sendPubMenu:sendPubMenu,
+        sendDinnerMenu:sendDinnerMenu,
+        sendPubMenu:sendPubMenu,
         sendAppetizers:sendAppetizers,
         sendSalad:sendSalad,
         sendFish:sendFish,
