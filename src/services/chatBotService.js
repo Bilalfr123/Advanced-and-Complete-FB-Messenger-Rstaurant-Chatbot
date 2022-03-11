@@ -480,6 +480,34 @@ let sendTypingOn = (sender_psid) => {
        }
     });
 };
+let markMessageSeen = (sender_psid) => {
+    return new Promise((resolve, reject) => {
+        try {
+            let request_body = {
+                "recipient": {
+                    "id": sender_psid
+                },
+                "sender_action":"mark_seen"
+            };
+
+            // Send the HTTP request to the Messenger Platform
+            request({
+                "uri": "https://graph.facebook.com/v6.0/me/messages",
+                "qs": { "access_token": PAGE_ACCESS_TOKEN },
+                "method": "POST",
+                "json": request_body
+            }, (err, res, body) => {
+                if (!err) {
+                    resolve('done!')
+                } else {
+                    reject("Unable to send message:" + err);
+                }
+            });
+        }catch (e) {
+          reject(e);
+        }
+    });
+};
 module.exports = {
         getFacebookUsername:getFacebookUsername,
         sendResponseWelcomeNewCustomer:sendResponseWelcomeNewCustomer,
@@ -492,5 +520,6 @@ module.exports = {
         askQuantity:askQuantity,
         sendMessageAskingPhoneNumber:sendMessageAskingPhoneNumber,
         sendMessageDoneReserveTable:sendMessageDoneReserveTable,
-        sendTypingOn:sendTypingOn
+        sendTypingOn:sendTypingOn,
+        markMessageSeen:markMessageSeen
 };

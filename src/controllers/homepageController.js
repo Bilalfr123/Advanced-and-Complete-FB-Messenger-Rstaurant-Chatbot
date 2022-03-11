@@ -83,6 +83,7 @@ function firstTrait(nlp, name) {
 // Handles messages events
 let handleMessage =async (sender_psid, message) => {
     //checking if the message is quick reply with options
+    await chatBotService.markMessageSeen(sender_psid);
     await chatBotService.sendTypingOn(sender_psid);
     if (message && message.quick_reply && message.quick_reply.payload) {
       
@@ -139,6 +140,7 @@ let handlePostback = async(sender_psid, received_postback) => {
        
     //         break;
     // }
+    await chatBotService.markMessageSeen(sender_psid);
     await chatBotService.sendTypingOn(sender_psid);
     if (payload === 'yes') {
         response = { "text": "Thanks!" }
