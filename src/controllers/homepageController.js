@@ -114,6 +114,7 @@ let handleMessage =async (sender_psid, message) => {
        return
     }
 let str = message.text
+console.log(str)
 if(validator.isMobilePhone(str)){
     await chatBotService.markMessageSeen(sender_psid);
     await chatBotService.sendTypingOn(sender_psid);
