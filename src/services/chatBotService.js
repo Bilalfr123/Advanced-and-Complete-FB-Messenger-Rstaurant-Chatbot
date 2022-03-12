@@ -809,7 +809,7 @@ let sendMessageAskingPhoneNumber = (sender_psid) => {
         },
         "messaging_type": "RESPONSE",
         "message": {
-            "text": "Thank you. And what's the best phone number for us to reach you at?\n\nThe phone format should be like one of following:\n +92-3106037890\n +923106037890\n 3106037890 ",
+            "text": "Thank you. And what's the best phone number for us to reach you at?\n\nThe phone format should be like one of following:\n +92-3106037890\n +923106037890\n  3106037890 ",
             "quick_replies": [
                 {
                     "content_type": "user_phone_number",
@@ -928,8 +928,6 @@ let livechat = (sender_psid) => {
     return new Promise(async (resolve, reject) => {
         try {
             let username = getFacebookUsername(sender_psid)
-            let usernameBold= username.text
-            let usernameBold1= username.bold()
 
             let response = {
                 "attachment": {
@@ -939,7 +937,7 @@ let livechat = (sender_psid) => {
                         "elements": [
                             {
                                 "title": "Talk to an agent",
-                                "subtitle": `Hey ${usernameBold1}, please wait a while till someone gets back to you.Would you like to check our Main Menu or make a Reservation?`,
+                                "subtitle": `Hey ${<b>username</b>}, please wait a while till someone gets back to you.Would you like to check our Main Menu or make a Reservation?`,
                                 "image_url": "https://media.istockphoto.com/photos/managing-the-days-inquiries-picture-id938430346?k=20&m=938430346&s=612x612&w=0&h=-5azqEhroazZL-ofgB_UWwQe9JMFDar4KnhB8VZiSeU=",
                                 "buttons": [
                                     {
