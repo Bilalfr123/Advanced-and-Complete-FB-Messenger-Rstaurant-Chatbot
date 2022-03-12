@@ -113,47 +113,107 @@ let handleMessage =async (sender_psid, message) => {
        return
     }
 
-    let response;
-let entitiesArr = [ "wit$greetings", "wit$thanks",];
-    let entityChosen = "";
-    entitiesArr.forEach((name) => {
-        let entity = firstTrait(message.nlp, name);
-        if (entity && entity.confidence > 0.8) {
-            entityChosen = name;
-        }
-    });
+//     let response;
+// let entitiesArr = [ "wit$greetings", "wit$thanks",];
+//     let entityChosen = "";
+//     entitiesArr.forEach((name) => {
+//         let entity = firstTrait(message.nlp, name);
+//         if (entity && entity.confidence > 0.8) {
+//             entityChosen = name;
+//         }
+//     });
 
-    if(entityChosen === ""){
-        if(message.text){
+//     if(entityChosen === ""){
+//         if(message.text){
 
-            let text = message.text.toLowerCase();
-            if(text.includes('main menu') || text.includes('menu main')){
-                await chatBotService.sendMainMenu(sender_psid);
-            }
-          else  if(text.includes('name')){
-                let username = await chatBotService.getFacebookUsername(sender_psid);
-                await chatBotService.sendUsername(username, sender_psid);
-            }
-          else  if(text.includes('fuck')){
-                
-                await chatBotService.sendStopAbuse(sender_psid);
-            }
-            else{
-                //default
-                await chatBotService.sendMessageDefaultForTheBot(sender_psid);
-            }
-        }
-    }else{
-       if(entityChosen === "wit$greetings"){
-await chatBotService.askQuantity(sender_psid)
-       }
-       if(entityChosen === "wit$thanks"){
-           //send thanks message
-           await chatBotService.sendMessageDoneReserveTable(sender_psid);
-    }
+//             let text = message.text.toLowerCase();
+//             if(text.includes('main menu') || text.includes('menu main')){
+//                 await chatBotService.sendMainMenu(sender_psid);
+//             }
+//           else  if(text.includes('name')){
+//                 let username = await chatBotService.getFacebookUsername(sender_psid);
+//                 await chatBotService.sendUsername(username, sender_psid);
+//             }
+//           else  if(text.includes('fuck')){
+//                 await chatBotService.sendStopAbuse(sender_psid);
+//             }
+//             else{
+//                 //default
+//                 await chatBotService.sendMessageDefaultForTheBot(sender_psid);
+//             }
+//         }
+//     }else{
+//        if(entityChosen === "wit$greetings"){
+// await chatBotService.askQuantity(sender_psid)
+//        }
+//        if(entityChosen === "wit$thanks"){
+//            //send thanks message
+//            await chatBotService.sendMessageDoneReserveTable(sender_psid);
+//     }
+// }
+let entity = handleMessageWithEntities(message);
+let locale = entity.locale;
+
+await chatBotService.sendTypingOn(sender_psid);
+await chatBotService.markMessageSeen(sender_psid);
+
+if (entity.name === "wit$datetime:datetime") {
+    //handle quick reply message: asking about the party size , how many people
+    user.time = moment(entity.value).zone("+07:00").format('MM/DD/YYYY h:mm A');
+
+    await chatBotService.askQuantity(sender_psid);
+} else if (entity.name === "wit$phone_number:phone_number") {
+    //handle quick reply message: done reserve table
+
+    user.phoneNumber = entity.value;
+    user.createdAt = moment(Date.now()).zone("+07:00").format('MM/DD/YYYY h:mm A');
+    //send a notification to Telegram Group chat by Telegram bot.
+    await chatBotService.sendNotificationToTelegram(user);
+
+    // send messages to the user
+    await chatBotService.sendMessageDoneReserveTable(sender_psid);
+
 }
- callSendAPI(sender_psid, response);
+//  else if (entity.name === "wit$greetings") {
+//     await homepageService.sendResponseGreetings(sender_psid, locale);
+// } else if (entity.name === "wit$thanks") {
+//     await homepageService.sendResponseThanks(sender_psid, locale);
+// } else if (entity.name === "wit$bye") {
+//     await homepageService.sendResponseBye(sender_psid, locale);
+// } 
+else {
+    //default reply
+    await chatBotService.sendMessageDefaultForTheBot(sender_psid);
+}
+
+//handle attachment message
+
+let handleMessageWithEntities = (message) => {
+let entitiesArr = [ "wit$datetime:datetime", "wit$phone_number:phone_number", "wit$greetings", "wit$thanks", "wit$bye" ];
+let entityChosen = "";
+let data = {}; // data is an object saving value and name of the entity.
+entitiesArr.forEach((name) => {
+    let entity = firstTrait(message.nlp, name.trim());
+    if (entity && entity.confidence > 0.8) {
+        entityChosen = name;
+        data.value = entity.value;
+    }
+});
+
+data.name = entityChosen;
+
+// checking language
+if (message && message.nlp && message.nlp.detected_locales) {
+    if (message.nlp.detected_locales[0]) {
+        let locale = message.nlp.detected_locales[0].locale;
+        data.locale = locale.substring(0, 2)
+    }
+    
+}
+return data;
 };
+// callSendAPI(sender_psid, response);
+}
 
 // Handles messaging_postbacks events
 let handlePostback = async(sender_psid, received_postback) => {

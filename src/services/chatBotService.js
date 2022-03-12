@@ -79,11 +79,11 @@ let sendGuideToUseBot = (sender_psid) => {
                     "\n\nFirst, I can show you the restaurant's menu: lunch, dinner and pub menu, etc. " +
                     "\n\nThen, you can make a reservation. No worry, it isn't a 'real' restaurant. Feel free to test me. 😊"
             };
-            let response2 = {
-                text: "Second, I can understand the sentences with meaning 'greetings', 'thanks' and 'bye'." +
-                    "\n\nE.g: If you say 'What's up 🇺🇸' or 'hola 🇪🇸' or 'hallo 🇩🇪', I know that it's a 'greetings' sentence. The same thing with 'thanks' and 'bye' sentences." +
-                    "\n\nTry to say: hello, bye, thanks a lot, Bonjour 🇫🇷, etc. you will understand what I mean. 😗"
-            };
+            // let response2 = {
+            //     text: "Second, I can understand the sentences with meaning 'greetings', 'thanks' and 'bye'." +
+            //         "\n\nE.g: If you say 'What's up 🇺🇸' or 'hola 🇪🇸' or 'hallo 🇩🇪', I know that it's a 'greetings' sentence. The same thing with 'thanks' and 'bye' sentences." +
+            //         "\n\nTry to say: hello, bye, thanks a lot, Bonjour 🇫🇷, etc. you will understand what I mean. 😗"
+            // };
             let response3 = {
                 text:  "Finally, remember I'm just a bot. So, That 's what can do for you today. 🤠" 
             };
@@ -111,8 +111,8 @@ let sendGuideToUseBot = (sender_psid) => {
 
             await sendTypingOn(sender_psid);
             await sendMessage(sender_psid, response1);
-            await sendTypingOn(sender_psid);
-            await sendMessage(sender_psid, response2);
+            // await sendTypingOn(sender_psid);
+            // await sendMessage(sender_psid, response2);
             await sendTypingOn(sender_psid);
             await sendMessage(sender_psid, response3);
             await sendTypingOn(sender_psid);
@@ -891,7 +891,7 @@ let sendMessageDoneReserveTable = async (sender_psid) => {
                         {
                             "type":"phone_number",
                             "title":"☎ HOT LINE",
-                            "payload":"+911911"
+                            "payload":"+923106037805"
                         },
                         {
                             "type": "postback",
