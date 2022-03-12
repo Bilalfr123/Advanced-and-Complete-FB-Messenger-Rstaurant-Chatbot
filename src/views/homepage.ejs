@@ -1,85 +1,31 @@
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <title>Set up the Restaurant Chatbot with Messenger</title>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-
-    <!-- Bootstrap 4 -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <!-- JQuery -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="js/profile.js"></script>
-</head>
-<body>
-
-<div class="container">
-    <div class="container">
-        <div class="row">
-            <div class="mt-3">
-               <div class="mt-3"> 
-                   This is a simple page, a guide to test a Facebook Messenger Bot
-                   (demo the restaurant Messenger Bot - click on the Messenger Icon at the bottom right)
-               </div>
-               <div>
-                   <p>Set up start button and perisistent menu</p>
-                 <form action="/setup" method="POST">
-                     <button type="submit">Set up</button>
-                   </form>
-                <div class="mt-3">
-                    Test my bot on Messenger (alway works): 👉  <a target="_blank" href="https://web.facebook.com/messages/t/103126065669964">http://m.me/dark'sRestaurant</a>
-                </div>
-                <br/>
-                <div><b>What can this bot do?</b>
-                    <ul>
-                        <li>Showing menu (lunch, dinner, pub menu), showing rooms.</li>
-                        <li>Take a reservation.</li>
-                        <li>Automatic understand a message is a datetime or a phone number (use for taking reservation)</li>
-                    </ul>
-                </div>
-
-                <div>
-                    <b>New update:</b>
-                    <ul>
-                        <li>
-                            Add the button: "Guide to use this bot".
-                        </li>
-                        <li>Turn on/off typing for the bot. Mark conversation is read.</li>
-
-                    </ul>
-                </div>
-            
-            </div>
+ <!DOCTYPE html>
+     <html lang="en">
+     <head>
+         <meta charset="UTF-8">
+         <title>Home Page</title>
+         <link rel="stylesheet" href="/css/style.css">
+     </head>
+     <body>
+     <h3>Hi there. This is a sample page, a quick start project for building a Messenger Chatbot.</h3>
+     <h3>For more information, please <a href="https://bit.ly/subscribe-haryphamdev" target="_blank">visit my youtube channel!</a></h3>
+    
+     <h3>The other chatbot I built before:</h3>
+     <h4 title="Click to chat with the bot"><a target="_blank" href="https://m.me/restaurantHaryPhamDev">A restaurant bot</a></h4>
+     <h4 title="Click to chat with the bot"><a  target="_blank" href=" https://m.me/techshopharyphamdev">An online store bot (video demo below)</a></h4>
+     <div>
+         <iframe width="853" height="480" src="https://www.youtube.com/embed/4zkR4nzmqA4" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+     </div>
+     < div>
+        <p>Set up start button and perisistent menu</p>
+         <form action="/setup" method="POST">
+             <button type="submit">Set up</button>    </form>
+        <div>
+            <p>Testing write data to google sheets online</p>
+            <form action="/write-data" method="POST">
+                <button>Write data</button>
+            </form>
         </div>
-    </div>
-
-
-
-    <!-- Load Facebook SDK for JavaScript --- Facebook Chat Plugin -->
- <div id="fb-root"></div>
-    <script>
-        window.fbAsyncInit = function() {
-            FB.init({
-                xfbml            : true,
-                version          : 'v6.0'
-            });
-        };
-        (function(d, s, id) {
-            var js, fjs = d.getElementsByTagName(s)[0];
-            if (d.getElementById(id)) return;
-            js = d.createElement(s); js.id = id;
-            js.src = 'https://connect.facebook.net/en_US/sdk/xfbml.customerchat.js';
-            fjs.parentNode.insertBefore(js, fjs);
-        }(document, 'script', 'facebook-jssdk'));</script>
-
-    <!-- Your Chat Plugin code -->
-    <div class="fb-customerchat"
-         attribution=setup_tool
-         page_id="<%= fbPageId %>"> -->
-    </div>
-</div>
-</body>
-</html>
+     </div>
+     </body>
+    </html> 
