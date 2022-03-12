@@ -118,6 +118,7 @@ let handleMessage =async (sender_psid, message) => {
                     let text = message.text.toLowerCase();
                     let str = message.text;
                     let regex = /^(\+\d{1,3}[- ]?)?\d{10}$/
+                    let regex2 = /^(0?[1-9]|1[0-2]):([0-5]\d)\s?((?:A|P)\.?M\.?)$/i
                     if(text.includes('main menu') || text.includes('menu main')){
                         await chatBotService.sendMainMenu(sender_psid);
                     }
@@ -128,15 +129,15 @@ let handleMessage =async (sender_psid, message) => {
                   else  if(text.includes('fuck')){
                         await chatBotService.sendStopAbuse(sender_psid);
                     }
-                    // else if(str.match(/^(\+\d{1,3}[- ]?)?\d{10}$/) && ! (str.match(/0{5,}/)) ){
-                    //     await chatBotService.markMessageSeen(sender_psid);
-                    //             await chatBotService.sendTypingOn(sender_psid);
-                    //           await chatBotService.askQuantity(sender_psid)
-                    // }
                 else if(str.split(" ").find(str => str.match(regex)) ){
                     await chatBotService.markMessageSeen(sender_psid);
                             await chatBotService.sendTypingOn(sender_psid);
                             await chatBotService.sendMessageDoneReserveTable(sender_psid);
+                }
+                else if(str.split(" ").find(str => str.match(regex2)) ){
+                    await chatBotService.markMessageSeen(sender_psid);
+                            await chatBotService.sendTypingOn(sender_psid);
+                          await chatBotService.askQuantity(sender_psid)
                 }
                 // else if(str.match(/^(\+\d{1,3}[- ]?)?\d{10}$/) && ! (str.match(/0{5,}/)) ){
                 //     await chatBotService.markMessageSeen(sender_psid);
