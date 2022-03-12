@@ -185,7 +185,7 @@ else {
     //default reply
     await chatBotService.sendMessageDefaultForTheBot(sender_psid);
 }
-
+}
 //handle attachment message
 
 let handleMessageWithEntities = (message) => {
@@ -213,7 +213,7 @@ if (message && message.nlp && message.nlp.detected_locales) {
 return data;
 };
 // callSendAPI(sender_psid, response);
-}
+
 
 // Handles messaging_postbacks events
 let handlePostback = async(sender_psid, received_postback) => {
