@@ -127,14 +127,15 @@ let handleMessage =async (sender_psid, message) => {
                   else  if(text.includes('fuck')){
                         await chatBotService.sendStopAbuse(sender_psid);
                     }
-                    else{
-                        //default
-                        await chatBotService.sendMessageDefaultForTheBot(sender_psid);
-                    }
-                    if(validator.isMobilePhone(str)){
+                 else   if(validator.isMobilePhone(str)){
                         await chatBotService.markMessageSeen(sender_psid);
                         await chatBotService.sendTypingOn(sender_psid);
                         await chatBotService.sendMessageDoneReserveTable(sender_psid);
+                    }
+                    
+                    else{
+                        //default
+                        await chatBotService.sendMessageDefaultForTheBot(sender_psid);
                     }
                     // else if(){
 
