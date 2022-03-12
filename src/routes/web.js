@@ -7,8 +7,8 @@ let router = express.Router();
 let initWebRoutes = (app) => {
     router.get("/", homepageController.getHomepage);
     router.get("/webhook", homepageController.getWebhook);
-    router.get("/profile", homepageController.getFacebookUserProfile);
-    router.post("/set-up-user-fb-profile", homepageController.setUpUserFacebookProfile);
+    // router.get("/profile", homepageController.getFacebookUserProfile);
+    // router.post("/set-up-user-fb-profile", homepageController.setUpUserFacebookProfile);
     router.post("/webhook", homepageController.postWebhook);
     // router.post("/setup", homepageController.handleSetupInfor); //persistent menu
     return app.use("/", router);
