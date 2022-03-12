@@ -10,6 +10,9 @@ const PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
 let getHomepage = (req, res) => {
     return res.render("homepage.ejs");
 };
+let getFacebookUserProfile = (req, res) => {
+    return res.render("profile.ejs");
+};
 let user = {
     name: "",
     phoneNumber: "",
@@ -284,62 +287,123 @@ let handlePostback = async(sender_psid, received_postback) => {
     // Send the message to acknowledge the postbal
     callSendAPI(sender_psid, response);
 };
+let setUpUserFacebookProfile = async (req, res) => {
+    // Send the HTTP request to the Messenger Platform
+    try{
+        await setUpMessengerPlatform(PAGE_ACCESS_TOKEN);
+        return res.status(200).json({
+            message: "OK"
+        });
+    }catch (e) {
+        return res.status(500).json({
+            "message": "Error from the node server"
+        })
+    }
+};
 
+let setUpMessengerPlatform = (PAGE_ACCESS_TOKEN) => {
+    return new Promise((resolve, reject) => {
+        try {
+            let data = {
+                "get_started": {
+                    "payload": "GET_STARTED"
+                },
+                "persistent_menu": [
+                    {
+                        "locale": "default",
+                        "composer_input_disabled": false,
+                        "call_to_actions": [
+                            {
+                                                    "type": "postback",
+                                                    "title": "Live Chat",
+                                                    "payload":"LIVE_CHAT"
+                                
+                                                },{
+                                                    "type":"postback",
+                                                    "title":"Restart Conversation",
+                                                    "payload":"RESTART_CONVERSATION"
+                                                  }
+                        ]
+                    }
+                ],
 
-let handleSetupInfor =async (req,res)=>{
-    //call fb api
+                "whitelisted_domains": [
+                    "https://dark-restaurant-bot.herokuapp.com/",      ]
+            };
 
-     // Send the HTTP request to  Messenger Platform
-   let request_body = {
-    "get_started":{
-        "payload":"GET_STARTED_PAYLOAD"
-      }, "persistent_menu": [
-        {
-            "locale": "default",
-            "composer_input_disabled": false,
-            "call_to_actions": [
-
-                {
-                    "type": "postback",
-                    "title": "Live Chat",
-                    "payload":"LIVE_CHAT"
-
-                },{
-                    "type":"postback",
-                    "title":"Restart Conversation",
-                    "payload":"RESTART_CONVERSATION"
-                  }
-            ]
-        }
-    ],  "whitelisted_domains":[
-        "https://dark-restaurant-bot.herokuapp.com/",
-
- 
-    ]
-   };
-
-    return new Promise((resolve,reject)=>{
-        try{
             request({
-                "uri": "https://graph.facebook.com/v13.0/me/messenger_profile?access_token=<PAGE_ACCESS_TOKEN>",
+                "uri": "https://graph.facebook.com/v6.0/me/messenger_profile",
                 "qs": { "access_token": PAGE_ACCESS_TOKEN },
                 "method": "POST",
-                "json": request_body
-            }, (err, response, body) => {
-                console.log(`start`)
-                console.log(`LOgs setup persistent menu and get started button: `, response)
-                console.log(`end--------------`)
+                "json": data
+            }, (err, res, body) => {
                 if (!err) {
-                    return res.send("setup done!")
+                    resolve("setup done!");
                 } else {
-                    return res.send("Something went wrong with server please check logs....")
+                    reject(err);
                 }
             });
-        }catch(e){
-            reject(e)
+
+        } catch (e) {
+            reject(e);
         }
-    })
-}
+    });
+};
+
+// let handleSetupInfor =async (req,res)=>{
+//     //call fb api
+
+//      // Send the HTTP request to  Messenger Platform
+//    let request_body = {
+//     "get_started":{
+//         "payload":"GET_STARTED_PAYLOAD"
+//       }, "persistent_menu": [
+//         {
+//             "locale": "default",
+//             "composer_input_disabled": false,
+//             "call_to_actions": [
+
+//                 {
+//                     "type": "postback",
+//                     "title": "Live Chat",
+//                     "payload":"LIVE_CHAT"
+
+//                 },{
+//                     "type":"postback",
+//                     "title":"Restart Conversation",
+//                     "payload":"RESTART_CONVERSATION"
+//                   }
+//             ]
+//         }
+//     ],  "whitelisted_domains":[
+//         "https://dark-restaurant-bot.herokuapp.com/",
+
+ 
+//     ]
+//    };
+
+//     return new Promise((resolve,reject)=>{
+//         try{
+//             request({
+//                 "uri": "https://graph.facebook.com/v13.0/me/messenger_profile?access_token=<PAGE_ACCESS_TOKEN>",
+//                 "qs": { "access_token": PAGE_ACCESS_TOKEN },
+//                 "method": "POST",
+//                 "json": request_body
+//             }, (err, response, body) => {
+//                 console.log(`start`)
+//                 console.log(`LOgs setup persistent menu and get started button: `, response)
+//                 console.log(`end--------------`)
+//                 if (!err) {
+//                     return res.send("setup done!")
+//                 } else {
+//                     return res.send("Something went wrong with server please check logs....")
+//                 }
+//             });
+//         }catch(e){
+//             reject(e)
+//         }
+//     })
+// }
   
 // Sends response messages via the Send API
 let callSendAPI = (sender_psid, response) => {
@@ -369,6 +433,8 @@ let callSendAPI = (sender_psid, response) => {
 module.exports = {
     getHomepage: getHomepage,
     getWebhook: getWebhook,
+ getFacebookUserProfile:getFacebookUserProfile, 
     postWebhook: postWebhook,
-    handleSetupInfor:handleSetupInfor,
+    // handleSetupInfor:handleSetupInfor,
+    setUpUserFacebookProfile:setUpUserFacebookProfile
 };
