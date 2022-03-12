@@ -309,7 +309,7 @@ let handleSetupInfor =async (req,res)=>{
 
                 {
                     "type": "postback",
-                    "title": "LIVE CHAT",
+                    "title": "Live Chat",
                     "payload":"LIVE_CHAT"
 
                 },{
