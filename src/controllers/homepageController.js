@@ -133,7 +133,7 @@ let handleMessage =async (sender_psid, message) => {
                     //             await chatBotService.sendTypingOn(sender_psid);
                     //           await chatBotService.askQuantity(sender_psid)
                     // }
-                else if(message.text.split(" ").find(str => str.match(regex)) ){
+                else if(str.split(" ").find(str => str.match(regex)) ){
                     await chatBotService.markMessageSeen(sender_psid);
                             await chatBotService.sendTypingOn(sender_psid);
                             await chatBotService.sendMessageDoneReserveTable(sender_psid);
