@@ -16,8 +16,14 @@ let user = {
     createdAt: ""
 };
 
+// let getHomepage = (req, res) => {
+//     return res.render("homepage.ejs");
+// };
 let getHomepage = (req, res) => {
-    return res.render("homepage.ejs");
+    let fbPageId = process.env.PAGE_ID;
+    return res.render("homepage.ejs",{
+        fbPageId
+    });
 };
 
 let getWebhook = (req, res) => {
