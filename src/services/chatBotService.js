@@ -660,6 +660,11 @@ let sendSalad = (sender_psid) => {
                         "buttons": [
                             {
                                 "type": "postback",
+                                "title": "BACK TO LUNCH MENU",
+                                "payload": "BACK_TO_LUNCH_MENU",
+                            },
+                            {
+                                "type": "postback",
                                 "title": "SHOW MAIN MENU",
                                 "payload": "MAIN_MENU"
                             },
@@ -705,6 +710,11 @@ let sendFish = (sender_psid) => {
                         "buttons": [
                             {
                                 "type": "postback",
+                                "title": "BACK TO LUNCH MENU",
+                                "payload": "BACK_TO_LUNCH_MENU",
+                            },
+                            {
+                                "type": "postback",
                                 "title": "SHOW MAIN MENU",
                                 "payload": "MAIN_MENU"
                             },
@@ -748,6 +758,11 @@ let sendClassic = (sender_psid) => {
                         "template_type": "button",
                         "text": `Perfect oven baked fries \n$30.00`,
                         "buttons": [
+                            {
+                                "type": "postback",
+                                "title": "BACK TO LUNCH MENU",
+                                "payload": "BACK_TO_LUNCH_MENU",
+                            },
                             {
                                 "type": "postback",
                                 "title": "SHOW MAIN MENU",
