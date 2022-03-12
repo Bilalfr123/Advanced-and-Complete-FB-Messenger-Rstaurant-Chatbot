@@ -7,18 +7,7 @@ import text from "body-parser/lib/types/text";
 const MY_VERIFY_TOKEN = process.env.MY_VERIFY_TOKEN;
 const PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
 
-// let getHomepage = (req, res) => {
-//     let fbPageId = process.env.PAGE_ID;
-//     return res.render("homepage.ejs",{
-//         fbPageId
-//     });
-// };
-let getHomepage = (req, res) => {
-    return res.render("homepage.ejs");
-};
-let getFacebookUserProfile = (req, res) => {
-    return res.render("profile.ejs");
-};
+
 let user = {
     name: "",
     phoneNumber: "",
@@ -26,6 +15,11 @@ let user = {
     quantity: "",
     createdAt: ""
 };
+
+let getHomepage = (req, res) => {
+    return res.render("homepage.ejs");
+};
+
 let getWebhook = (req, res) => {
 
     // Your verify token. Should be a random string.
