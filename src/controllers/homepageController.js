@@ -133,11 +133,11 @@ let handleMessage =async (sender_psid, message) => {
                 //         await chatBotService.sendTypingOn(sender_psid);
                 //         await chatBotService.sendMessageDoneReserveTable(sender_psid);
                 //     }
-                 else   if(str.match(regex)){
-                        await chatBotService.markMessageSeen(sender_psid);
-                        await chatBotService.sendTypingOn(sender_psid);
-                        await chatBotService.sendMessageDoneReserveTable(sender_psid);
-                    }
+                else if(str.match(/^(\+\d{1,3}[- ]?)?\d{10}$/) && ! (number.match(/0{5,}/)) ){
+                    await chatBotService.markMessageSeen(sender_psid);
+                            await chatBotService.sendTypingOn(sender_psid);
+                            await chatBotService.sendMessageDoneReserveTable(sender_psid);
+                }
 
                     else{
                         //default
