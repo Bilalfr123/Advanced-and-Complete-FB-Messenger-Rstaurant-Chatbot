@@ -117,7 +117,7 @@ let handleMessage =async (sender_psid, message) => {
 
                     let text = message.text.toLowerCase();
                     let str = message.text;
-                    let regex = /[0-9]{9}/
+                    let regex = /^(\+\d{1,3}[- ]?)?\d{10}$/
                     if(text.includes('main menu') || text.includes('menu main')){
                         await chatBotService.sendMainMenu(sender_psid);
                     }
