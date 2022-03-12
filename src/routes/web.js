@@ -10,7 +10,7 @@ let initWebRoutes = (app) => {
     // router.get("/profile", homepageController.getFacebookUserProfile);
     // router.post("/set-up-user-fb-profile", homepageController.setUpUserFacebookProfile);
     router.post("/webhook", homepageController.postWebhook);
-    // router.post("/setup", homepageController.handleSetupInfor); //persistent menu
+    router.post("/setup", homepageController.handleSetupInfor); //persistent menu
     return app.use("/", router);
 };
 
