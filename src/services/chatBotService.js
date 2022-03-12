@@ -927,40 +927,46 @@ let sendMessageDoneReserveTable = async (sender_psid) => {
 let livechat = (sender_psid) => {
     return new Promise(async (resolve, reject) => {
         try {
-            let username = getFacebookUsername(sender_psid)
+            let username =await getFacebookUsername(sender_psid)
 
-            let response = {
-                "attachment": {
-                    "type": "template",
-                    "payload": {
-                        "template_type": "generic",
-                        "elements": [
-                            {
-                                "title": "Talk to an agent",
-                                "subtitle": `Hey ${username}, please wait a while till someone gets back to you.Would you like to check our Main Menu or make a Reservation?`,
-                                "image_url": "https://media.istockphoto.com/photos/managing-the-days-inquiries-picture-id938430346?k=20&m=938430346&s=612x612&w=0&h=-5azqEhroazZL-ofgB_UWwQe9JMFDar4KnhB8VZiSeU=",
-                                "buttons": [
-                                    {
-                                        "type": "postback",
-                                        "title": "SHOW MAIN MENU",
-                                        "payload": "MAIN_MENU",
-                                    },
-                                    {
-                                        "type": "postback",
-                                        "title": "RESERVE A TABLE",
-                                        "payload": "RESERVE_TABLE",
-                                    },
-                                    {
-                                        "type": "postback",
-                                        "title": "GUIDE TO USE THIS BOT",
-                                        "payload": "GUIDE_BOT",
-                                    }
-                                ],
-                            } ]
-                    }
+let response1 = {
+    "attachment": {
+        "type": "image",
+        "payload": {
+            "url": `${process.env.CUSTOMER_CARE_IMAGE}`
+        }
+    }
+};
+let response2 = {
+    "attachment": {
+        "type": "template",
+        "payload": {
+            "template_type": "button",
+            "text": `Hey ${username}, please wait a while till someone gets back to you.Would you like to check our Main Menu or make a Reservation?`,
+            "buttons": [
+                {
+                    "type": "postback",
+                    "title": "SHOW MAIN MENU",
+                    "payload": "MAIN_MENU"
+                },
+                {
+                    "type": "postback",
+                    "title": "RESERVE A TABLE",
+                    "payload": "RESERVE_TABLE",
+                },
+                {
+                    "type": "postback",
+                    "title": "GUIDE TO USE THIS BOT",
+                    "payload": "GUIDE_BOT",
                 }
-            };
-         sendMessage(sender_psid, response);
+            ]
+        }
+    }
+};
+            await sendTypingOn(sender_psid);
+         sendMessage(sender_psid, response1);
+         await sendTypingOn(sender_psid);
+         sendMessage(sender_psid, response2);
             resolve("done");
         } catch (e) {
             reject(e);
