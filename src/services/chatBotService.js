@@ -907,6 +907,71 @@ let sendMessageDoneReserveTable = async (sender_psid) => {
         console.log(e);
     }
 };
+let sendMessageDefaultForTheBot = (sender_psid) => {
+    return new Promise (async (resolve, reject) => {
+        try{
+            //send a media template
+            let response2 = {
+                "attachment": {
+                    "type": "template",
+                    "payload": {
+                        "template_type": "button",
+                        "text": `"Sorry, I'm just a bot, man ^^ \nYou can test me with all these buttons or try to make a reservation.`,
+                        "buttons": [
+                            {
+                                "type": "postback",
+                                "title": "SHOW MAIN MENU",
+                                "payload": "MAIN_MENU"
+                            },   {
+                                "type": "postback",
+                                "title": "RESERVE A TABLE",
+                                "payload": "RESERVE_TABLE",
+                            },
+                            {
+                                "type": "postback",
+                                "title": "START OVER",
+                                "payload": "RESTART_CONVERSATION"
+                            }
+                        ]
+                    }
+                }
+            };
+            await sendTypingOn(sender_psid);
+            await sendMessage(sender_psid, response2);
+            resolve("done");
+        }catch (e) {
+            reject(e);
+        }
+    });
+};
+let sendUsername = (username,sender_psid) => {
+    return new Promise (async (resolve, reject) => {
+        try{
+let response1 = {
+    'text' : `Hey, i know your name is ${username}`
+}
+            await sendTypingOn(sender_psid);
+            await sendMessage(sender_psid, response1);
+            resolve("done");
+        }catch (e) {
+            reject(e);
+        }
+    });
+};
+let sendStopAbuse = (sender_psid) => {
+    return new Promise (async (resolve, reject) => {
+        try{
+let response1 = {
+    'text' : `Hey dont say that bad word!`
+}
+            await sendTypingOn(sender_psid);
+            await sendMessage(sender_psid, response1);
+            resolve("done");
+        }catch (e) {
+            reject(e);
+        }
+    });
+};
 //like call send api
 let sendMessage = (sender_psid, response) => {
     return new Promise((resolve, reject) => {
@@ -1050,5 +1115,8 @@ module.exports = {
         sendMessageDoneReserveTable:sendMessageDoneReserveTable,
         sendTypingOn:sendTypingOn,
         markMessageSeen:markMessageSeen,
-        sendNotificationToTelegram:sendNotificationToTelegram
+        sendNotificationToTelegram:sendNotificationToTelegram,
+        sendMessageDefaultForTheBot:sendMessageDefaultForTheBot,
+        sendUsername:sendUsername,
+        sendStopAbuse:sendStopAbuse
 };

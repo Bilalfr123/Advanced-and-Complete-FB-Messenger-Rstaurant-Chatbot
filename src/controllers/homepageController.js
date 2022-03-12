@@ -2,6 +2,7 @@ require("dotenv").config();
 import request from "request";
 import moment from "moment";
 import chatBotService from '../services/chatBotService'
+import text from "body-parser/lib/types/text";
 const MY_VERIFY_TOKEN = process.env.MY_VERIFY_TOKEN;
 const PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
 
@@ -123,10 +124,25 @@ let entitiesArr = [ "wit$greetings", "wit$thanks",];
     });
 
     if(entityChosen === ""){
-        //default
-        response = {
-                                "text": `Please send me correct info as asked!`
-                            }
+        if(message.text){
+
+            let text = message.text.toLowerCase();
+            if(text.includes('main menu') || text.includes('menu main')){
+                await chatBotService.sendMainMenu(sender_psid);
+            }
+          else  if(text.includes('name')){
+                let username = await chatBotService.getFacebookUsername(sender_psid);
+                await chatBotService.sendUsername(username, sender_psid);
+            }
+          else  if(text.includes('fuck')){
+                
+                await chatBotService.sendStopAbuse(sender_psid);
+            }
+            else{
+                //default
+                await chatBotService.sendMessageDefaultForTheBot(sender_psid);
+            }
+        }
     }else{
        if(entityChosen === "wit$greetings"){
 await chatBotService.askQuantity(sender_psid)
