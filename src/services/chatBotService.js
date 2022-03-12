@@ -794,7 +794,9 @@ let handleReservation = (username,sender_psid) => {
         try {
      
             let response = { text: `Hi ${username}, What time and date you would like to reserve a table ?\n\nThe time format should be like tomorrow at 12:20AM or any time of your choice` };
+            let response1 = { text: `P.S: You must type time in this format  "2:30 AM" ` };
             await sendMessage(sender_psid, response);
+            await sendMessage(sender_psid, response1);
         } catch (e) {
             reject(e);
         }
@@ -807,7 +809,7 @@ let sendMessageAskingPhoneNumber = (sender_psid) => {
         },
         "messaging_type": "RESPONSE",
         "message": {
-            "text": "Thank you. And what's the best phone number for us to reach you at?\n\nThe phone format should be like one of following:\n +92-3106037890\n+923106037890\n3106037890 ",
+            "text": "Thank you. And what's the best phone number for us to reach you at?\n\nThe phone format should be like one of following:\n +92-3106037890\n +923106037890\n 3106037890 ",
             "quick_replies": [
                 {
                     "content_type": "user_phone_number",
@@ -921,6 +923,49 @@ let sendMessageDoneReserveTable = async (sender_psid) => {
     } catch (e) {
         console.log(e);
     }
+};
+let livechat = (sender_psid) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            let username = getFacebookUsername(sender_psid)
+            let usernameBold= username.bold()
+            let response = {
+                "attachment": {
+                    "type": "template",
+                    "payload": {
+                        "template_type": "generic",
+                        "elements": [
+                            {
+                                "title": "Talk to an agent",
+                                "subtitle": `Hey ${usernameBold}, please wait a while till someone gets back to you.Would you like to check our Main Menu or make a Reservation?`,
+                                "image_url": "https://media.istockphoto.com/photos/managing-the-days-inquiries-picture-id938430346?k=20&m=938430346&s=612x612&w=0&h=-5azqEhroazZL-ofgB_UWwQe9JMFDar4KnhB8VZiSeU=",
+                                "buttons": [
+                                    {
+                                        "type": "postback",
+                                        "title": "SHOW MAIN MENU",
+                                        "payload": "MAIN_MENU",
+                                    },
+                                    {
+                                        "type": "postback",
+                                        "title": "RESERVE A TABLE",
+                                        "payload": "RESERVE_TABLE",
+                                    },
+                                    {
+                                        "type": "postback",
+                                        "title": "GUIDE TO USE THIS BOT",
+                                        "payload": "GUIDE_BOT",
+                                    }
+                                ],
+                            } ]
+                    }
+                }
+            };
+         sendMessage(sender_psid, response);
+            resolve("done");
+        } catch (e) {
+            reject(e);
+        }
+    });
 };
 let sendMessageDefaultForTheBot = (sender_psid) => {
     return new Promise (async (resolve, reject) => {
@@ -1133,5 +1178,6 @@ module.exports = {
         sendNotificationToTelegram:sendNotificationToTelegram,
         sendMessageDefaultForTheBot:sendMessageDefaultForTheBot,
         sendUsername:sendUsername,
-        sendStopAbuse:sendStopAbuse
+        sendStopAbuse:sendStopAbuse,
+        livechat:livechat
 };

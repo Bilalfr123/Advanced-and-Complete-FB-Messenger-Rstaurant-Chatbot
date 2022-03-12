@@ -283,6 +283,9 @@ let handlePostback = async(sender_psid, received_postback) => {
      else if (payload === 'BACK_TO_MAIN_MENU') {
         await chatBotService.sendMainMenu(sender_psid);
     }
+     else if (payload === 'LIVE_CHAT') {
+        await chatBotService.livechat(sender_psid);
+    }
     else{
         console.log('err with if else statemnt payload')
     }
@@ -303,18 +306,12 @@ let handleSetupInfor =async (req,res)=>{
             "locale": "default",
             "composer_input_disabled": false,
             "call_to_actions": [
-           
+
                 {
-                    "type": "web_url",
-                    "title": "Shop now",
-                    "url": "https://www.originalcoastclothing.com/",
-                    
-                },
-                {
-                    "type": "web_url",
-                    "title": "Get Lost",
-                    "url": "https://www.originalcoastclothing.com/",
-                    "webview_height_ratio": "full"
+                    "type": "postback",
+                    "title": "LIVE CHAT",
+                    "payload":"LIVE_CHAT"
+
                 },{
                     "type":"postback",
                     "title":"Restart Conversation",
