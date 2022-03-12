@@ -115,10 +115,13 @@ let handleMessage =async (sender_psid, message) => {
     }
 let str = message.text
 console.log(str)
-if(validator.isMobilePhone(str)){
-    await chatBotService.markMessageSeen(sender_psid);
-    await chatBotService.sendTypingOn(sender_psid);
-    await chatBotService.sendMessageDoneReserveTable(sender_psid);
+if(str){
+
+    if(validator.isMobilePhone(str)){
+        await chatBotService.markMessageSeen(sender_psid);
+        await chatBotService.sendTypingOn(sender_psid);
+        await chatBotService.sendMessageDoneReserveTable(sender_psid);
+    }
 }
 //     let response;
 // let entitiesArr = [ "wit$greetings", "wit$thanks",];
