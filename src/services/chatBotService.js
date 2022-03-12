@@ -793,7 +793,7 @@ let handleReservation = (username,sender_psid) => {
     return new Promise(async (resolve, reject) => {
         try {
      
-            let response = { text: `Hi ${username}, What time and date you would like to reserve a table ?` };
+            let response = { text: `Hi ${username}, What time and date you would like to reserve a table ?\n\nThe time format should be like tomorrow at 12:20AM or any time of your choice` };
             await sendMessage(sender_psid, response);
         } catch (e) {
             reject(e);
@@ -807,7 +807,7 @@ let sendMessageAskingPhoneNumber = (sender_psid) => {
         },
         "messaging_type": "RESPONSE",
         "message": {
-            "text": "Thank you. And what's the best phone number for us to reach you at?",
+            "text": "Thank you. And what's the best phone number for us to reach you at?\n\nThe phone format should be like one of following:\n +92-3106037890\n+923106037890\n3106037890 ",
             "quick_replies": [
                 {
                     "content_type": "user_phone_number",
