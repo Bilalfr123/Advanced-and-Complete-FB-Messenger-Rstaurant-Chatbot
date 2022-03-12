@@ -10,7 +10,7 @@ $(document).ready(function() {
                 console.log(data);
             },
             error: function(error) {
-                console.log(error);
+                console.log(error + 'kkkk');
             }
         })
     });
