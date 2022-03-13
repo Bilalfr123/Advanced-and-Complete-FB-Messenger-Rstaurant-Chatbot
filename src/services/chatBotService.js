@@ -1215,7 +1215,6 @@ module.exports = {
         sendGuideToUseBot:sendGuideToUseBot,
         sendMainMenu:sendMainMenu,
         sendLunchMenu:sendLunchMenu,
-        markMessageSeen:markMessageSeen,
         handleShowRooms:handleShowRooms,
         showRoomDetail:showRoomDetail,
         sendDinnerMenu:sendDinnerMenu,
