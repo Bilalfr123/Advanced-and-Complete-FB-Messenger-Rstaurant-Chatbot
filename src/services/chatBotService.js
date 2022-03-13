@@ -33,7 +33,7 @@ let sendResponseWelcomeNewCustomer = (username, sender_psid) => {
                             {
                                 "title": "Dark's restaurant",
                                 "subtitle": "My restaurant is legendary, its classic wine collection equally so.",
-                                "image_url": "https://bit.ly/imageToSend",
+                                "image_url": `${process.env.MAIN_MENU}`,
                                 "buttons": [
                                     {
                                         "type": "postback",
@@ -137,7 +137,7 @@ let sendMainMenu = (sender_psid)=>{
                             {
                                 "title": "Our menus",
                                 "subtitle": "We are pleased to offer you a wide-range of menu for lunch or dinner.",
-                                "image_url": "https://bit.ly/imageToSend",
+                                "image_url": `${process.env.MAIN_MENU_IMAGE}`,
                                 "buttons": [
                                     {
                                         "type": "postback",
@@ -158,7 +158,7 @@ let sendMainMenu = (sender_psid)=>{
                             },    {
                                 "title": "Hours",
                                 "subtitle": "MON-FRI 10AM - 11PM  | SAT 5PM - 10PM | SUN 5PM - 9PM",
-                                "image_url": " https://bit.ly/imageOpening",
+                                "image_url": `${process.env.HOURS_IMAGE}`,
                                 "buttons": [
                                     {
                                         "type": "postback",
@@ -171,7 +171,7 @@ let sendMainMenu = (sender_psid)=>{
                             {
                                 "title": "Banquet Rooms",
                                 "subtitle": "Restaurant accommodates up to 300 seated guests and similar at cocktail receptions",
-                                "image_url": " https://bit.ly/imageShowRooms",
+                                "image_url": `${process.env.ROOMS_IMAGE}`,
                                 "buttons": [
                                     {
                                         "type": "postback",
@@ -209,7 +209,7 @@ let sendLunchMenu = (sender_psid) => {
                         "elements": [
                             {
                                 "title": "Appetizers",
-                                "image_url": "https://bit.ly/imageAppetizer",
+                                "image_url": `${process.env.APPETIZERS_IMAGE}` ,
                                 "buttons": [
                                     {
                                         "type": "postback",
@@ -221,7 +221,8 @@ let sendLunchMenu = (sender_psid) => {
 
                             {
                                 "title": "Entree Salad",
-                                "image_url": "https://bit.ly/imageSalad",
+                                "image_url": `${process.env.ENTREE_SALAD_IMAGE}`
+                                    ,
                                 "buttons": [
                                     {
                                         "type": "postback",
@@ -233,7 +234,7 @@ let sendLunchMenu = (sender_psid) => {
 
                             {
                                 "title": "Fish and Shell Fish",
-                                "image_url": "https://bit.ly/imageFish",
+                                "image_url": `${process.env.FISH_IMAGE}`,
                                 "buttons": [
                                     {
                                         "type": "postback",
@@ -246,7 +247,7 @@ let sendLunchMenu = (sender_psid) => {
                             {
                                 "title": "Skeens Classics",
                                 "subtitle": "and Dry-aged on Premise",
-                                "image_url": "https://bit.ly/imageClassics",
+                                "image_url": `${process.env.CLASSIC_IMAGE}` ,
                                 "buttons": [
                                     {
                                         "type": "postback",
@@ -258,7 +259,7 @@ let sendLunchMenu = (sender_psid) => {
 
                             {
                                 "title": "Go back",
-                                "image_url": " https://bit.ly/imageToSend",
+                                "image_url": `${process.env.HOT_GIRL_GO_BACK_IMAGE}`,
                                 "buttons": [
                                     {
                                         "type": "postback",
@@ -793,8 +794,8 @@ let handleReservation = (username,sender_psid) => {
     return new Promise(async (resolve, reject) => {
         try {
      
-            let response = { text: `Hi ${username}, What time and date you would like to reserve a table ?\n\nThe time format should be like tomorrow at 12:20AM or any time of your choice` };
-            let response1 = { text: `P.S: You must type time in this format  "2:30 AM" ` };
+            let response = { text: `Hi ${username}, What time and date you would like to reserve a table ?` };
+            let response1 = { text: `P.S: You must type time in this format  "2:30am/pm" such as no space and small alphabets ` };
             await sendMessage(sender_psid, response);
             await sendMessage(sender_psid, response1);
         } catch (e) {
@@ -809,7 +810,7 @@ let sendMessageAskingPhoneNumber = (sender_psid) => {
         },
         "messaging_type": "RESPONSE",
         "message": {
-            "text": "Thank you. And what's the best phone number for us to reach you at?\n\nThe phone format should be like one of following:\n +92-3106037890\n +923106037890\n  3106037890 ",
+            "text": "Thank you. And what's the best phone number for us to reach you at?\nThe phone format should be like one of following:\n +92-3106037890\n +923106037890\n   3106037890 ",
             "quick_replies": [
                 {
                     "content_type": "user_phone_number",

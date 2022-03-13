@@ -382,7 +382,7 @@ let handleSetupInfor =async (req,res)=>{
             ]
         }
     ],  "whitelisted_domains":[
-        "https://dark-restaurant-bot.herokuapp.com/",
+      `${process.env.SERVER_URL}`,
 
  
     ]
