@@ -515,7 +515,7 @@ let handleShowRooms = (sender_psid) => {
                             {
                                 "title": "Go back",
                                 "image_url": `${process.env.HOT_GIRL_GO_BACK_IMAGE}`,
-                                "buttons": [,
+                                "buttons": [
                                     {
                                         "type": "postback",
                                         "title": "BACK TO MAIN MENU",

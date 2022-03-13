@@ -131,9 +131,9 @@ let handleMessage =async (sender_psid, message) => {
                 //         let username = await chatBotService.getFacebookUsername(sender_psid);
                 //         await chatBotService.sendUsername(username, sender_psid);
                 //     }
-                //   else  if(text.includes('fuck')){
-                //         await chatBotService.sendStopAbuse(sender_psid);
-                //     }
+                  else  if(text.includes('fuck')){
+                        await chatBotService.sendStopAbuse(sender_psid);
+                    }
                 else if(str.split(" ").find(str => str.match(regex)) ){
                             await chatBotService.sendMessageDoneReserveTable(sender_psid);
                 }
