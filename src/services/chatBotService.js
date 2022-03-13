@@ -58,8 +58,12 @@ let sendResponseWelcomeNewCustomer = (sender_psid) => {
             };
 
             //send a welcome message
+            await markMessageSeen(sender_psid);
             await sendTypingOn(sender_psid);
             await sendMessage(sender_psid, response_first);
+
+
+            await markMessageSeen(sender_psid);
             await sendTypingOn(sender_psid);
             //send a image with button view main menu
             await sendMessage(sender_psid, response_second);
@@ -109,13 +113,16 @@ let sendGuideToUseBot = (sender_psid) => {
                     }
                 }
             };
-
+ await markMessageSeen(sender_psid);
             await sendTypingOn(sender_psid);
             await sendMessage(sender_psid, response1);
             // await sendTypingOn(sender_psid);
             // await sendMessage(sender_psid, response2);
+            await markMessageSeen(sender_psid);
             await sendTypingOn(sender_psid);
             await sendMessage(sender_psid, response3);
+
+            await markMessageSeen(sender_psid);
             await sendTypingOn(sender_psid);
             await sendMessage(sender_psid, response5);
          
@@ -189,6 +196,7 @@ let sendMainMenu = (sender_psid)=>{
          
 
             //send a image with button view main menu
+            await markMessageSeen(sender_psid)
             await sendTypingOn(sender_psid);
             await sendMessage(sender_psid, response_second);
 
@@ -348,25 +356,31 @@ let sendDinnerMenu = (sender_psid) => {
                     }
                 }
             };
-
+            await markMessageSeen(sender_psid)
             await sendTypingOn(sender_psid);
             await sendMessage(sender_psid, response1);
 
+            await markMessageSeen(sender_psid);
             await sendTypingOn(sender_psid);
             await sendMessage(sender_psid, response2);
 
+            await markMessageSeen(sender_psid);
             await sendTypingOn(sender_psid);
             await sendMessage(sender_psid, response3);
 
+            await markMessageSeen(sender_psid);
             await sendTypingOn(sender_psid);
             await sendMessage(sender_psid, response4);
 
+            await markMessageSeen(sender_psid);
             await sendTypingOn(sender_psid);
             await sendMessage(sender_psid, response5);
 
+            await markMessageSeen(sender_psid);
             await sendTypingOn(sender_psid);
             await sendMessage(sender_psid, response6);
 
+            await markMessageSeen(sender_psid);
             await sendTypingOn(sender_psid);
             await sendMessage(sender_psid, response7);
 
@@ -437,25 +451,32 @@ let sendPubMenu = (sender_psid) => {
                     }
                 }
             };
-
+            await markMessageSeen(sender_psid);
             await sendTypingOn(sender_psid);
             await sendMessage(sender_psid, response1);
 
+            await markMessageSeen(sender_psid);
             await sendTypingOn(sender_psid);
             await sendMessage(sender_psid, response2);
 
+            await markMessageSeen(sender_psid);
             await sendTypingOn(sender_psid);
             await sendMessage(sender_psid, response3);
 
+            await markMessageSeen(sender_psid);
             await sendTypingOn(sender_psid);
             await sendMessage(sender_psid, response4);
 
+            await markMessageSeen(sender_psid);
             await sendTypingOn(sender_psid);
             await sendMessage(sender_psid, response5);
 
+            
+            await markMessageSeen(sender_psid);
             await sendTypingOn(sender_psid);
             await sendMessage(sender_psid, response6);
 
+            await markMessageSeen(sender_psid);
             await sendTypingOn(sender_psid);
             await sendMessage(sender_psid, response7);
             resolve("done");
@@ -534,6 +555,7 @@ let handleShowRooms = (sender_psid) => {
             };
 
             //send a welcome message
+            await markMessageSeen(sender_psid);
             await sendTypingOn(sender_psid);
             await sendMessage(sender_psid, response);
         } catch (e) {
@@ -574,9 +596,11 @@ let showRoomDetail = (sender_psid) => {
                     }
                 }
             };
-
+            await markMessageSeen(sender_psid);
             await sendTypingOn(sender_psid);
             await sendMessage(sender_psid, response1);
+
+            await markMessageSeen(sender_psid);
             await sendTypingOn(sender_psid);
             await sendMessage(sender_psid, response2);
 
@@ -639,6 +663,7 @@ try{
                     }
                 }
             };
+            await markMessageSeen(sender_psid);
             await sendTypingOn(sender_psid);
             await sendMessage(sender_psid, response);
         }catch(e){
@@ -683,9 +708,11 @@ let sendSalad = (sender_psid) => {
                     }
                 }
             };
-
+            await markMessageSeen(sender_psid);
             await sendTypingOn(sender_psid);
             await sendMessage(sender_psid, response1);
+
+            await markMessageSeen(sender_psid);
             await sendTypingOn(sender_psid);
             await sendMessage(sender_psid, response2);
 
@@ -733,9 +760,12 @@ let sendFish = (sender_psid) => {
                     }
                 }
             };
-
+ await markMessageSeen(sender_psid);
             await sendTypingOn(sender_psid);
             await sendMessage(sender_psid, response1);
+
+            
+            await markMessageSeen(sender_psid);
             await sendTypingOn(sender_psid);
             await sendMessage(sender_psid, response2);
 
