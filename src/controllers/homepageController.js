@@ -140,7 +140,7 @@ let handleMessage =async (sender_psid, message) => {
                             await chatBotService.sendMessageDoneReserveTable(sender_psid);
                 }
                 else if(str.split(" ").find(str => str.match(regex2)) ){
-                    await markMessageSeen(sender_psid);
+                   
                     await sendTypingOn(sender_psid);
                           await chatBotService.askQuantity(sender_psid)
                 }
