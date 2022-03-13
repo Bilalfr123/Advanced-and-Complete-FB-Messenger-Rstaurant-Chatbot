@@ -238,7 +238,6 @@ let handlePostback = async(sender_psid, received_postback) => {
           await chatBotService.sendResponseWelcomeNewCustomer( sender_psid);
     }
      else if (payload === 'RESTART_CONVERSATION') {
-        let username = await chatBotService.getFacebookUsername(sender_psid);
           await chatBotService.sendResponseWelcomeNewCustomer( sender_psid);
     }
     else if (payload === 'MAIN_MENU') {
