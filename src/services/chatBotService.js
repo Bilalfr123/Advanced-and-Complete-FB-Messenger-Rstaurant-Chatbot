@@ -472,7 +472,7 @@ let handleShowRooms = (sender_psid) => {
                             {
                                 "title": "Bull Moose Room",
                                 "subtitle": "The room is suited for parties of up to 25 people",
-                                "image_url": "https://bit.ly/showRoom1",
+                                "image_url": `${process.env.ROOM_1}`,
                                 "buttons": [
                                     {
                                         "type": "postback",
@@ -485,7 +485,7 @@ let handleShowRooms = (sender_psid) => {
                             {
                                 "title": "Lillie Langstry Room",
                                 "subtitle": "The room is suited for parties of up to 35 people",
-                                "image_url": "https://bit.ly/showRoom2",
+                                "image_url":`${process.env.ROOM_2}`,
                                 "buttons": [
                                     {
                                         "type": "postback",
@@ -498,7 +498,7 @@ let handleShowRooms = (sender_psid) => {
                             {
                                 "title": "Lincoln Room",
                                 "subtitle": "The room is suited for parties of up to 45 people",
-                                "image_url": "https://bit.ly/showRoom3",
+                                "image_url":`${process.env.ROOM_3}`,
                                 "buttons": [
                                     {
                                         "type": "postback",
@@ -510,8 +510,8 @@ let handleShowRooms = (sender_psid) => {
 
                             {
                                 "title": "Go back",
-                                "image_url": " https://bit.ly/imageToSend",
-                                "buttons": [
+                                "image_url": `${process.env.HOT_GIRL_GO_BACK_IMAGE}`,
+                                "buttons": [,
                                     {
                                         "type": "postback",
                                         "title": "BACK TO MAIN MENU",
@@ -545,7 +545,7 @@ let showRoomDetail = (sender_psid) => {
                 "attachment": {
                     "type": "image",
                     "payload": {
-                        "url":  " https://bit.ly/imageToSend" //add gif
+                        "url":   `${process.env.ROOM_GIF}` //add gif
                     }
                 }
             };
@@ -595,24 +595,24 @@ try{
                             {
                                 "title": "Little Neck Clams on the Half Shell",
                                 "subtitle": "Dozen - $20.00",
-                                "image_url": "https://bit.ly/appetizers1",
+                                "image_url":  `${process.env.APPETIZER_1}` 
                             },
 
                             {
                                 "title": "Fresh Oysters",
                                 "subtitle": "1/2 Dozen - $21.00 | Dozen - $40.00",
-                                "image_url": "https://bit.ly/appetizers2",
+                                "image_url":`${process.env.APPETIZER_2}` ,
                             },
 
                             {
                                 "title": "Lobster Salad",
                                 "subtitle": "Half Lobster with Avocado and Grapefruit",
-                                "image_url": "https://bit.ly/appetizers3",
+                                "image_url": `${process.env.APPETIZER_3}` 
+                                ,
                             },
-
                             {
                                 "title": "Go back",
-                                "image_url": " https://bit.ly/imageToSend",
+                                "image_url":`${process.env.HOT_GIRL_GO_BACK_IMAGE2}` ,
                                 "buttons": [
                                     {
                                         "type": "postback",
@@ -843,20 +843,17 @@ let askQuantity = async(sender_psid)=>{
             "quick_replies":[
               {
                 "content_type":"text",
-                "title":"1-2",
+                "title":"🙍‍♂️1-2",
                 "payload":"SMALL",
-                "image_url":"http://example.com/img/red.png"
               },{
                 "content_type":"text",
-                "title":"4-5",
+                "title":"👪4-5",
                 "payload":"MEDIUM",
-                "image_url":"http://example.com/img/green.png"
               }
               ,{
                 "content_type":"text",
-                "title":"9-10",
+                "title":"👩‍👩‍👦‍👦9-10",
                 "payload":"LARGE",
-                "image_url":"http://example.com/img/green.png"
               }
             ]
           }
