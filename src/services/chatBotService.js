@@ -294,7 +294,7 @@ let sendDinnerMenu = (sender_psid) => {
                 "attachment": {
                     "type": "image",
                     "payload": {
-                        "url": "https://djfoodie.com/wp-content/uploads/Crab-Cocktail-3-800.jpg"
+                        "url": `${process.env.DINNER_IMAGE1}`
                     }
                 }
             };
@@ -306,7 +306,7 @@ let sendDinnerMenu = (sender_psid) => {
                 "attachment": {
                     "type": "image",
                     "payload": {
-                        "url": "https://www.thespruceeats.com/thmb/rys3IyH2DB6Ma_r4IQ6emN-2jYw=/4494x3000/filters:fill(auto,1)/simple-homemade-gravlax-recipe-2216618_hero-01-592dadcba64743f98aa1f7a14f81d5b4.jpg"
+                        "url": `${process.env.DINNER_IMAGE2}`
                     }
                 }
             };
@@ -318,7 +318,7 @@ let sendDinnerMenu = (sender_psid) => {
                 "attachment": {
                     "type": "image",
                     "payload": {
-                        "url": "https://portcitydaily.com/wp-content/uploads/For-the-Shell-of-It.jpg"
+                        "url": `${process.env.DINNER_IMAGE3}`
                     }
                 }
             };
@@ -383,8 +383,8 @@ let sendPubMenu = (sender_psid) => {
                 "attachment": {
                     "type": "image",
                     "payload": {
-                        "url": "https://previews.123rf.com/images/genmike/genmike1411/genmike141100010/33951440-burger-and-french-fries.jpg"
-                    }
+                        "url":`${process.env.PUB_IMAGE1}`
+                    } 
                 }
             };
 
@@ -395,7 +395,7 @@ let sendPubMenu = (sender_psid) => {
                 "attachment": {
                     "type": "image",
                     "payload": {
-                        "url": "https://s3-ap-southeast-1.amazonaws.com/v3-live.image.oddle.me/product/Blackforesthamcheesebfd18d.jpg"
+                        "url": `${process.env.PUB_IMAGE2}`
                     }
                 }
             };
@@ -407,7 +407,7 @@ let sendPubMenu = (sender_psid) => {
                 "attachment": {
                     "type": "image",
                     "payload": {
-                        "url": "https://www.bbcgoodfood.com/sites/default/files/styles/recipe/public/recipe_images/ribs_0.jpg?itok=bOf0t_NF"
+                        "url":`${process.env.PUB_IMAGE3}`
                     }
                 }
             };
