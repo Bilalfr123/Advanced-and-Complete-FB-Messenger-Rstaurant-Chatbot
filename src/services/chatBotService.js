@@ -799,7 +799,7 @@ let handleReservation = (sender_psid) => {
         try {
      
             let response = { text: `Hi , What time and date you would like to reserve a table ?` };
-            let response1 = { text: `P.S: You must type time in this format  "2:30am/pm" such as no space and small alphabets ` };
+            let response1 = { text: `P.S: You must type time in this format  "2:30am/pm" such as no space b/w time value and am/pm` };
             await sendMessage(sender_psid, response);
             await sendMessage(sender_psid, response1);
         } catch (e) {
