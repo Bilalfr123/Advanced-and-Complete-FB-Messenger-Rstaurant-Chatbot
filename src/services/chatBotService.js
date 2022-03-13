@@ -21,7 +21,7 @@ const PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
 //         });
 //     });
 // };
-let sendResponseWelcomeNewCustomer = (username, sender_psid) => {
+let sendResponseWelcomeNewCustomer = (sender_psid) => {
     return new Promise(async (resolve, reject) => {
         try {
             let response_first = { "text": `Welcome to Dark's Restaurant` };
@@ -794,11 +794,11 @@ let sendClassic = (sender_psid) => {
         }
     });
 };
-let handleReservation = (username,sender_psid) => {
+let handleReservation = (sender_psid) => {
     return new Promise(async (resolve, reject) => {
         try {
      
-            let response = { text: `Hi ${username}, What time and date you would like to reserve a table ?` };
+            let response = { text: `Hi , What time and date you would like to reserve a table ?` };
             let response1 = { text: `P.S: You must type time in this format  "2:30am/pm" such as no space and small alphabets ` };
             await sendMessage(sender_psid, response);
             await sendMessage(sender_psid, response1);

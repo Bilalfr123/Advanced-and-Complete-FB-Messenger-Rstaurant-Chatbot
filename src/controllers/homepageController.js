@@ -127,10 +127,10 @@ let handleMessage =async (sender_psid, message) => {
                     if(text.includes('main menu') || text.includes('menu main')){
                         await chatBotService.sendMainMenu(sender_psid);
                     }
-                  else  if(text.includes('name')){
-                        let username = await chatBotService.getFacebookUsername(sender_psid);
-                        await chatBotService.sendUsername(username, sender_psid);
-                    }
+                //   else  if(text.includes('name')){
+                //         let username = await chatBotService.getFacebookUsername(sender_psid);
+                //         await chatBotService.sendUsername(username, sender_psid);
+                //     }
                 //   else  if(text.includes('fuck')){
                 //         await chatBotService.sendStopAbuse(sender_psid);
                 //     }
@@ -229,17 +229,17 @@ let handlePostback = async(sender_psid, received_postback) => {
     }
      else if (payload === 'GET_STARTED_PAYLOAD') {
           //get facebook username
-          let username = await chatBotService.getFacebookUsername(sender_psid);
-          console.log(username)
-          user.name = username;
-          console.log(user.name)
+        //   let username = await chatBotService.getFacebookUsername(sender_psid);
+        //   console.log(username)
+        //   user.name = username;
+        //   console.log(user.name)
           //send welcome response to users
 
-          await chatBotService.sendResponseWelcomeNewCustomer(username, sender_psid);
+          await chatBotService.sendResponseWelcomeNewCustomer( sender_psid);
     }
      else if (payload === 'RESTART_CONVERSATION') {
         let username = await chatBotService.getFacebookUsername(sender_psid);
-          await chatBotService.sendResponseWelcomeNewCustomer(username, sender_psid);
+          await chatBotService.sendResponseWelcomeNewCustomer( sender_psid);
     }
     else if (payload === 'MAIN_MENU') {
        await chatBotService.sendMainMenu(sender_psid);
@@ -275,8 +275,8 @@ let handlePostback = async(sender_psid, received_postback) => {
         await chatBotService.sendClassic(sender_psid);
     }
      else if (payload === "RESERVE_TABLE"){
-        let username = await chatBotService.getFacebookUsername(sender_psid);
-        await chatBotService.handleReservation(username,sender_psid);
+       
+        await chatBotService.handleReservation(sender_psid);
     }
      else if (payload === "BACK_TO_LUNCH_MENU"){
         await chatBotService.sendLunchMenu(sender_psid);
