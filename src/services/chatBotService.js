@@ -1,29 +1,30 @@
 import { promiseImpl } from "ejs";
 import request from "request";
 const PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
-let getFacebookUsername = (sender_psid) => {
-    return new Promise((resolve, reject) => {
-        // Send the HTTP request to the Messenger Platform
-        let uri = `https://graph.facebook.com/${sender_psid}?fields=first_name,last_name,profile_pic&access_token=${PAGE_ACCESS_TOKEN}`;
-        request({
-            "uri": uri,
-            "method": "GET",
-        }, (err, res, body) => {
-            if (!err) {
-                //convert string to json object
-                body = JSON.parse(body);
-                let username = `${body.last_name} ${body.first_name}`;
-                resolve(username);
-            } else {
-                reject("Unable to send message:" + err);
-            }
-        });
-    });
-};
+
+// let getFacebookUsername = (sender_psid) => {
+//     return new Promise((resolve, reject) => {
+//         // Send the HTTP request to the Messenger Platform
+//         let uri = `https://graph.facebook.com/${sender_psid}?fields=first_name,last_name,profile_pic&access_token=${PAGE_ACCESS_TOKEN}`;
+//         request({
+//             "uri": uri,
+//             "method": "GET",
+//         }, (err, res, body) => {
+//             if (!err) {
+//                 //convert string to json object
+//                 body = JSON.parse(body);
+//                 let username = `${body.last_name} ${body.first_name}`;
+//                 resolve(username);
+//             } else {
+//                 reject("Unable to send message:" + err);
+//             }
+//         });
+//     });
+// };
 let sendResponseWelcomeNewCustomer = (username, sender_psid) => {
     return new Promise(async (resolve, reject) => {
         try {
-            let response_first = { "text": `Welcome ${username} to Dark's Restaurant` };
+            let response_first = { "text": `Welcome to Dark's Restaurant` };
             let response_second = {
                 "attachment": {
                     "type": "template",
@@ -188,7 +189,8 @@ let sendMainMenu = (sender_psid)=>{
          
 
             //send a image with button view main menu
-            sendMessage(sender_psid, response_second);
+            await markMessageSeen(sender_psid);
+            await sendMessage(sender_psid, response_second);
 
             resolve("done!")
         } catch (e) {
@@ -277,7 +279,9 @@ let sendLunchMenu = (sender_psid) => {
                     }
                 }
             };
-         sendMessage(sender_psid, response);
+            await markMessageSeen(sender_psid);
+            await sendTypingOn(sender_psid);
+        await sendMessage(sender_psid, response);
             resolve("done");
         } catch (e) {
             reject(e);
@@ -648,7 +652,7 @@ let sendSalad = (sender_psid) => {
                 "attachment": {
                     "type": "image",
                     "payload": {
-                        "url": 'https://bit.ly/imageToSend'
+                        "url": `${process.env.ENTREE_IMAGE}`
                     }
                 }
             };
@@ -698,7 +702,7 @@ let sendFish = (sender_psid) => {
                 "attachment": {
                     "type": "image",
                     "payload": {
-                        "url": 'https://bit.ly/imageToSend'
+                        "url":`${process.env.FISH_IMAGE_1}`
                     }
                 }
             };
@@ -748,7 +752,7 @@ let sendClassic = (sender_psid) => {
                 "attachment": {
                     "type": "image",
                     "payload": {
-                        "url": 'https://bit.ly/imageToSend'
+                        "url": `${process.env.FRIES_IMAGE}`
                     }
                 }
             };
@@ -880,23 +884,21 @@ let sendMessageDoneReserveTable = async (sender_psid) => {
             "attachment": {
                 "type": "image",
                 "payload": {
-                    "url": "https://bit.ly/giftDonalTrump"
+                    "url": `${process.env.DONE_RESERVATION}`
+                    
                 }
             }
         };
   
-        await sendMessage(sender_psid, response);
-
-        //get facebook username
-        let username = await getFacebookUsername(sender_psid);
-
+        
+        
         //send another message
         let response2 = {
             "attachment": {
                 "type": "template",
                 "payload": {
                     "template_type": "button",
-                    "text": `Done! \nOur reservation team will contact you as soon as possible ${username}.\n \nWould you like to check our Main Menu?`,
+                    "text": `Done! \nOur reservation team will contact you as soon as possible.\n \nWould you like to check our Main Menu?`,
                     "buttons": [
                         {
                             "type": "postback",
@@ -917,6 +919,7 @@ let sendMessageDoneReserveTable = async (sender_psid) => {
                 }
             }
         };
+        await sendMessage(sender_psid, response);
         await sendMessage(sender_psid, response2);
     } catch (e) {
         console.log(e);
@@ -925,7 +928,6 @@ let sendMessageDoneReserveTable = async (sender_psid) => {
 let livechat = (sender_psid) => {
     return new Promise(async (resolve, reject) => {
         try {
-            let username =await getFacebookUsername(sender_psid)
 
 let response1 = {
     "attachment": {
@@ -940,7 +942,7 @@ let response2 = {
         "type": "template",
         "payload": {
             "template_type": "button",
-            "text": `Hey ${username}, please wait a while till someone gets back to you.Would you like to check our Main Menu or make a Reservation?`,
+            "text": `Hey, please wait a while till someone gets back to you.Would you like to check our Main Menu or make a Reservation?`,
             "buttons": [
                 {
                     "type": "postback",
@@ -1008,20 +1010,20 @@ let sendMessageDefaultForTheBot = (sender_psid) => {
         }
     });
 };
-let sendUsername = (username,sender_psid) => {
-    return new Promise (async (resolve, reject) => {
-        try{
-let response1 = {
-    'text' : `Hey, i know your name is ${username}`
-}
-            await sendTypingOn(sender_psid);
-            await sendMessage(sender_psid, response1);
-            resolve("done");
-        }catch (e) {
-            reject(e);
-        }
-    });
-};
+// let sendUsername = (username,sender_psid) => {
+//     return new Promise (async (resolve, reject) => {
+//         try{
+// let response1 = {
+//     'text' : `Hey, i know your name is ${username}`
+// }
+//             await sendTypingOn(sender_psid);
+//             await sendMessage(sender_psid, response1);
+//             resolve("done");
+//         }catch (e) {
+//             reject(e);
+//         }
+//     });
+// };
 let sendStopAbuse = (sender_psid) => {
     return new Promise (async (resolve, reject) => {
         try{
@@ -1133,14 +1135,14 @@ let sendNotificationToTelegram = (user) => {
                 text: `
 | --- <b>A new reservation</b> --- |
 | ------------------------------------------------|
-| 1. Username: <b>${user.name}</b>   |
-| 2. Phone number: <b>${user.phoneNumber}</b> |
-| 4. Quantity: <b>${user.quantity}</b> |
-| 5. Created at: ${user.createdAt} |
+| 1. Phone number: <b>${user.phoneNumber}</b> |
+| 2. Time: <b>${user.time}</b> |
+| 3. Quantity: <b>${user.quantity}</b> |
+| 4. Created at: ${user.createdAt} |
 | ------------------------------------------------ |                           
 `
-// | 3. Time: <b>${user.time}</b> |
-            };
+};
+// | 1. Username: <b>${user.name}</b>   |  
 
             // Send the HTTP request to the Telegram
             request({
@@ -1160,7 +1162,7 @@ let sendNotificationToTelegram = (user) => {
     });
 };
 module.exports = {
-        getFacebookUsername:getFacebookUsername,
+        // getFacebookUsername:getFacebookUsername,
         sendResponseWelcomeNewCustomer:sendResponseWelcomeNewCustomer,
         sendGuideToUseBot:sendGuideToUseBot,
         sendMainMenu:sendMainMenu,
@@ -1181,7 +1183,7 @@ module.exports = {
         markMessageSeen:markMessageSeen,
         sendNotificationToTelegram:sendNotificationToTelegram,
         sendMessageDefaultForTheBot:sendMessageDefaultForTheBot,
-        sendUsername:sendUsername,
+        // sendUsername:sendUsername,
         sendStopAbuse:sendStopAbuse,
         livechat:livechat
 };
