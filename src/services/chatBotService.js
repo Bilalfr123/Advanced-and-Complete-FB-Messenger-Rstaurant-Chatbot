@@ -58,9 +58,9 @@ let sendResponseWelcomeNewCustomer = (sender_psid) => {
             };
 
             //send a welcome message
-         
+            await sendTypingOn(sender_psid);
             await sendMessage(sender_psid, response_first);
-
+            await sendTypingOn(sender_psid);
             //send a image with button view main menu
             await sendMessage(sender_psid, response_second);
 
@@ -189,7 +189,7 @@ let sendMainMenu = (sender_psid)=>{
          
 
             //send a image with button view main menu
-            await markMessageSeen(sender_psid);
+            await sendTypingOn(sender_psid);
             await sendMessage(sender_psid, response_second);
 
             resolve("done!")
@@ -639,6 +639,7 @@ try{
                     }
                 }
             };
+            await sendTypingOn(sender_psid);
             await sendMessage(sender_psid, response);
         }catch(e){
             reject(e)
@@ -919,7 +920,9 @@ let sendMessageDoneReserveTable = async (sender_psid) => {
                 }
             }
         };
+        await sendTypingOn(sender_psid);
         await sendMessage(sender_psid, response);
+        await sendTypingOn(sender_psid);
         await sendMessage(sender_psid, response2);
     } catch (e) {
         console.log(e);

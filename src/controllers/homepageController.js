@@ -106,7 +106,8 @@ let handleMessage =async (sender_psid, message) => {
         if (message.quick_reply.payload === "SMALL" || message.quick_reply.payload === "MEDIUM" || message.quick_reply.payload === "LARGE") {
             if (message.quick_reply.payload === "SMALL") user.quantity = "1-2 people";
             if (message.quick_reply.payload === "MEDIUM") user.quantity = "2-5 people";
-            if (message.quick_reply.payload === "LARGE") user.quantity = "More than 5 people";;
+            if (message.quick_reply.payload === "LARGE") user.quantity = "More than 5 people";
+            await sendTypingOn(sender_psid);
             await chatBotService.sendMessageAskingPhoneNumber(sender_psid);
         return
         }
@@ -138,7 +139,7 @@ let handleMessage =async (sender_psid, message) => {
                             await chatBotService.sendMessageDoneReserveTable(sender_psid);
                 }
                 else if(str.split(" ").find(str => str.match(regex2)) ){
-
+                    await sendTypingOn(sender_psid);
                           await chatBotService.askQuantity(sender_psid)
                 }
                 // else if(str.match(/^(\+\d{1,3}[- ]?)?\d{10}$/) && ! (str.match(/0{5,}/)) ){
