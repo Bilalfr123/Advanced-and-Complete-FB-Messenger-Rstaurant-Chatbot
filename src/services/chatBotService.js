@@ -764,7 +764,7 @@ let sendFish = (sender_psid) => {
             await sendTypingOn(sender_psid);
             await sendMessage(sender_psid, response1);
 
-            
+
             await markMessageSeen(sender_psid);
             await sendTypingOn(sender_psid);
             await sendMessage(sender_psid, response2);
@@ -813,9 +813,11 @@ let sendClassic = (sender_psid) => {
                     }
                 }
             };
-
+ await markMessageSeen(sender_psid);
             await sendTypingOn(sender_psid);
             await sendMessage(sender_psid, response1);
+
+            await markMessageSeen(sender_psid);
             await sendTypingOn(sender_psid);
             await sendMessage(sender_psid, response2);
 
@@ -831,6 +833,7 @@ let handleReservation = (sender_psid) => {
      
             let response = { text: `Hi , What time and date you would like to reserve a table ?` };
             let response1 = { text: `P.S: You must type time in this format  "2:30am/pm" such as no space b/w time value and am/pm` };
+            await markMessageSeen(sender_psid);
             await sendMessage(sender_psid, response);
             await sendMessage(sender_psid, response1);
         } catch (e) {
@@ -950,8 +953,11 @@ let sendMessageDoneReserveTable = async (sender_psid) => {
                 }
             }
         };
+        await markMessageSeen(sender_psid);
         await sendTypingOn(sender_psid);
         await sendMessage(sender_psid, response);
+
+        await markMessageSeen(sender_psid);
         await sendTypingOn(sender_psid);
         await sendMessage(sender_psid, response2);
     } catch (e) {
@@ -996,8 +1002,11 @@ let response2 = {
         }
     }
 };
+await markMessageSeen(sender_psid);
             await sendTypingOn(sender_psid);
          await sendMessage(sender_psid, response1);
+
+         await markMessageSeen(sender_psid);
          await sendTypingOn(sender_psid);
          await sendMessage(sender_psid, response2);
             resolve("done");
@@ -1035,6 +1044,7 @@ let sendMessageDefaultForTheBot = (sender_psid) => {
                     }
                 }
             };
+            await markMessageSeen(sender_psid);
             await sendTypingOn(sender_psid);
             await sendMessage(sender_psid, response2);
             resolve("done");
@@ -1063,6 +1073,7 @@ let sendStopAbuse = (sender_psid) => {
 let response1 = {
     'text' : `Hey dont say that bad word!`
 }
+await markMessageSeen(sender_psid);
             await sendTypingOn(sender_psid);
             await sendMessage(sender_psid, response1);
             resolve("done");
