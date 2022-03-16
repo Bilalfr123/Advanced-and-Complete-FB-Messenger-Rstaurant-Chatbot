@@ -136,7 +136,13 @@ let handleMessage =async (sender_psid, message) => {
                   else  if(text.includes('fuck')){
                         await chatBotService.sendStopAbuse(sender_psid);
                     }
-                else if(str.split(" ").find(str => str.match(regex)) ){
+                // else if(str.split(" ").find(str => str.match(regex)) ){
+                //             user.phoneNumber = str;
+                //             user.createdAt = moment(Date.now()).zone("+07:00").format('MM/DD/YYYY h:mm A');
+                //             await chatBotService.sendNotificationToTelegram(user);
+                //             await chatBotService.sendMessageDoneReserveTable(sender_psid);
+                // }
+                else if(str.match(regex) ){
                             user.phoneNumber = str;
                             user.createdAt = moment(Date.now()).zone("+07:00").format('MM/DD/YYYY h:mm A');
                             await chatBotService.sendNotificationToTelegram(user);
