@@ -1211,7 +1211,7 @@ let sendNotificationToTelegram = (user) => {
     });
 };
 module.exports = {
-        // getFacebookUsername:getFacebookUsername,
+        getFacebookUsername:getFacebookUsername,
         sendResponseWelcomeNewCustomer:sendResponseWelcomeNewCustomer,
         sendGuideToUseBot:sendGuideToUseBot,
         sendMainMenu:sendMainMenu,
