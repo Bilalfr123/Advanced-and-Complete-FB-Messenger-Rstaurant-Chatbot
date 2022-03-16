@@ -144,7 +144,8 @@ let handleMessage =async (sender_psid, message) => {
                 // }
                 else if(str.match(regex) ){
                             user.phoneNumber = str;
-                            user.createdAt = moment(Date.now()).zone("+07:00").format('MM/DD/YYYY h:mm A');
+                            user.createdAt = moment(Date.now()).format('MM/DD/YYYY h:mm A');
+                            // user.createdAt = moment(Date.now()).zone("+07:00").format('MM/DD/YYYY h:mm A');
                             await chatBotService.sendNotificationToTelegram(user);
                             await chatBotService.sendMessageDoneReserveTable(sender_psid);
                 }

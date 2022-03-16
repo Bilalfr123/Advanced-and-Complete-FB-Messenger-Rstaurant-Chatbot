@@ -853,7 +853,8 @@ let sendMessageAskingPhoneNumber = (sender_psid) => {
         },
         "messaging_type": "RESPONSE",
         "message": {
-            "text": "Thank you. And what's the best phone number for us to reach you at?\nThe phone format should be like one of following:\n +92-3106037890\n +923106037890\n   3106037890 ",
+            "text": "Thank you. And what's the best phone number for us to reach you at?",
+            // "text": "Thank you. And what's the best phone number for us to reach you at?\nThe phone format should be like one of following:\n +92-3106037890\n +923106037890\n   3106037890 ",
             "quick_replies": [
                 {
                     "content_type": "user_phone_number",
