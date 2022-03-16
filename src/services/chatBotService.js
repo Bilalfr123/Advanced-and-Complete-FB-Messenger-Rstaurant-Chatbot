@@ -1288,13 +1288,13 @@ let sendNotificationToTelegram = (user) => {
                 text: `
 | --- <b>A new reservation</b> --- |
 | ------------------------------------------------|
-| 1. Phone number: <b>${user.phoneNumber}</b> |
-| 2. Time: <b>${user.time}</b> |
-| 3. Quantity: <b>${user.quantity}</b> |
-| 4. Created at: ${user.createdAt} |
+| 1. Username: <b>Caravn Rabas</b> |    
+| 2. Phone number: <b>${user.phoneNumber}</b> |
+| 3. Time: <b>${user.time}</b> |
+| 4. Quantity: <b>${user.quantity}</b> |
+| 5. Created at: ${user.createdAt} |
 | ------------------------------------------------ |                           
 `
-// | 1. Username: <b>${user.name}</b> |    
 };    
 
             // Send the HTTP request to the Telegram
