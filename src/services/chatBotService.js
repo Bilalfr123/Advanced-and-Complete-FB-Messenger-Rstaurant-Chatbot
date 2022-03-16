@@ -833,14 +833,14 @@ let handleReservation = (sender_psid) => {
         try {
      
             let response = { text: `Hi , What time and date you would like to reserve a table ?` };
-            let response1 = { text: `P.S: You must type time in this format  "2:30am/pm" such as no space b/w time value and am/pm` };
+            // let response1 = { text: `P.S: You must type time in this format  "2:30am/pm" such as no space b/w time value and am/pm` };
             await markMessageSeen(sender_psid);
             await sendTypingOn(sender_psid);
             await sendMessage(sender_psid, response);
             
-            await markMessageSeen(sender_psid);
-            await sendTypingOn(sender_psid);
-            await sendMessage(sender_psid, response1);
+            // await markMessageSeen(sender_psid);
+            // await sendTypingOn(sender_psid);
+            // await sendMessage(sender_psid, response1);
         } catch (e) {
             reject(e);
         }
