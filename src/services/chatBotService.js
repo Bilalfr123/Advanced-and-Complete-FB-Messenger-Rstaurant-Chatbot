@@ -3,25 +3,25 @@ import request from "request";
 import user from  '../controllers/homepageController'
 const PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
 
-let getFacebookUsername = (sender_psid) => {
-    return new Promise((resolve, reject) => {
-        // Send the HTTP request to the Messenger Platform
-        let uri = `https://graph.facebook.com/${sender_psid}?fields=first_name,last_name,profile_pic&access_token=${PAGE_ACCESS_TOKEN}`;
-        request({
-            "uri": uri,
-            "method": "GET",
-        }, (err, res, body) => {
-            if (!err) {
-                //convert string to json object
-                body = JSON.parse(body);
-                let username = `${body.last_name} ${body.first_name}`;
-                resolve(username);
-            } else {
-                reject("Unable to send message:" + err);
-            }
-        });
-    });
-};
+// let getFacebookUsername = (sender_psid) => {
+//     return new Promise((resolve, reject) => {
+//         // Send the HTTP request to the Messenger Platform
+//         let uri = `https://graph.facebook.com/${sender_psid}?fields=first_name,last_name,profile_pic&access_token=${PAGE_ACCESS_TOKEN}`;
+//         request({
+//             "uri": uri,
+//             "method": "GET",
+//         }, (err, res, body) => {
+//             if (!err) {
+//                 //convert string to json object
+//                 body = JSON.parse(body);
+//                 let username = `${body.last_name} ${body.first_name}`;
+//                 resolve(username);
+//             } else {
+//                 reject("Unable to send message:" + err);
+//             }
+//         });
+//     });
+// };
 let sendResponseWelcomeNewCustomer = (username,sender_psid) => {
     return new Promise(async (resolve, reject) => {
         try {
@@ -1185,13 +1185,13 @@ let sendNotificationToTelegram = (user) => {
                 text: `
 | --- <b>A new reservation</b> --- |
 | ------------------------------------------------|
-| 1. Username: <b>${user.name}</b> |    
-| 2. Phone number: <b>${user.phoneNumber}</b> |
-| 3. Time: <b>${user.time}</b> |
-| 4. Quantity: <b>${user.quantity}</b> |
-| 5. Created at: ${user.createdAt} |
+| 1. Phone number: <b>${user.phoneNumber}</b> |
+| 2. Time: <b>${user.time}</b> |
+| 3. Quantity: <b>${user.quantity}</b> |
+| 4. Created at: ${user.createdAt} |
 | ------------------------------------------------ |                           
 `
+// | 1. Username: <b>${user.name}</b> |    
 };    
 
             // Send the HTTP request to the Telegram
@@ -1212,7 +1212,7 @@ let sendNotificationToTelegram = (user) => {
     });
 };
 module.exports = {
-        getFacebookUsername:getFacebookUsername,
+        // getFacebookUsername:getFacebookUsername,
         sendResponseWelcomeNewCustomer:sendResponseWelcomeNewCustomer,
         sendGuideToUseBot:sendGuideToUseBot,
         sendMainMenu:sendMainMenu,
@@ -1233,7 +1233,7 @@ module.exports = {
         markMessageSeen:markMessageSeen,
         sendNotificationToTelegram:sendNotificationToTelegram,
         sendMessageDefaultForTheBot:sendMessageDefaultForTheBot,
-        sendUsername:sendUsername,
+        // sendUsername:sendUsername,
         sendStopAbuse:sendStopAbuse,
         livechat:livechat
 };
