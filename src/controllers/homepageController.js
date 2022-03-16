@@ -129,10 +129,10 @@ let handleMessage =async (sender_psid, message) => {
                     if(text.includes('main menu') || text.includes('menu main')){
                         await chatBotService.sendMainMenu(sender_psid);
                     }
-                //   else  if(text.includes('name')){
-                //         let username = await chatBotService.getFacebookUsername(sender_psid);
-                //         await chatBotService.sendUsername(username, sender_psid);
-                //     }
+                  else  if(text.includes('name')){
+                        let username = await chatBotService.getFacebookUsername(sender_psid);
+                        await chatBotService.sendUsername(username, sender_psid);
+                    }
                   else  if(text.includes('fuck')){
                         await chatBotService.sendStopAbuse(sender_psid);
                     }

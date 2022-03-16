@@ -1059,20 +1059,20 @@ let sendMessageDefaultForTheBot = (sender_psid) => {
         }
     });
 };
-// let sendUsername = (username,sender_psid) => {
-//     return new Promise (async (resolve, reject) => {
-//         try{
-// let response1 = {
-//     'text' : `Hey, i know your name is ${username}`
-// }
-//             await sendTypingOn(sender_psid);
-//             await sendMessage(sender_psid, response1);
-//             resolve("done");
-//         }catch (e) {
-//             reject(e);
-//         }
-//     });
-// };
+let sendUsername = (username,sender_psid) => {
+    return new Promise (async (resolve, reject) => {
+        try{
+let response1 = {
+    'text' : `Hey, i know your name is ${username}`
+}
+            await sendTypingOn(sender_psid);
+            await sendMessage(sender_psid, response1);
+            resolve("done");
+        }catch (e) {
+            reject(e);
+        }
+    });
+};
 let sendStopAbuse = (sender_psid) => {
     return new Promise (async (resolve, reject) => {
         try{
@@ -1233,7 +1233,7 @@ module.exports = {
         markMessageSeen:markMessageSeen,
         sendNotificationToTelegram:sendNotificationToTelegram,
         sendMessageDefaultForTheBot:sendMessageDefaultForTheBot,
-        // sendUsername:sendUsername,
+        sendUsername:sendUsername,
         sendStopAbuse:sendStopAbuse,
         livechat:livechat
 };
