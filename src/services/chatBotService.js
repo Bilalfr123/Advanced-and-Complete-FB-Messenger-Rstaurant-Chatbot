@@ -67,6 +67,7 @@ let sendResponseWelcomeNewCustomer = (sender_psid) => {
             
             await markMessageSeen(sender_psid);
             await sendTypingOn(sender_psid);
+
             //send a image with button view main menu
             await sendMessage(sender_psid, response_second);
             await sendTypingOff(sender_psid);
@@ -119,15 +120,21 @@ let sendGuideToUseBot = (sender_psid) => {
  await markMessageSeen(sender_psid);
             await sendTypingOn(sender_psid);
             await sendMessage(sender_psid, response1);
+            await sendTypingOff(sender_psid);
+
             // await sendTypingOn(sender_psid);
             // await sendMessage(sender_psid, response2);
             await markMessageSeen(sender_psid);
             await sendTypingOn(sender_psid);
             await sendMessage(sender_psid, response3);
+            await sendTypingOff(sender_psid);
+
 
             await markMessageSeen(sender_psid);
             await sendTypingOn(sender_psid);
             await sendMessage(sender_psid, response5);
+            await sendTypingOff(sender_psid);
+
          
 
             resolve("done");
@@ -199,9 +206,11 @@ let sendMainMenu = (sender_psid)=>{
          
 
             //send a image with button view main menu
-            // await markMessageSeen(sender_psid)
+            await markMessageSeen(sender_psid)
             await sendTypingOn(sender_psid);
             await sendMessage(sender_psid, response_second);
+            await sendTypingOff(sender_psid);
+
 
             resolve("done!")
         } catch (e) {
@@ -364,30 +373,44 @@ let sendDinnerMenu = (sender_psid) => {
             await markMessageSeen(sender_psid)
             await sendTypingOn(sender_psid);
             await sendMessage(sender_psid, response1);
+            await sendTypingOff(sender_psid);
+
 
             await markMessageSeen(sender_psid);
             await sendTypingOn(sender_psid);
             await sendMessage(sender_psid, response2);
+            await sendTypingOff(sender_psid);
+
 
             await markMessageSeen(sender_psid);
             await sendTypingOn(sender_psid);
             await sendMessage(sender_psid, response3);
+            await sendTypingOff(sender_psid);
+
 
             await markMessageSeen(sender_psid);
             await sendTypingOn(sender_psid);
             await sendMessage(sender_psid, response4);
+            await sendTypingOff(sender_psid);
+
 
             await markMessageSeen(sender_psid);
             await sendTypingOn(sender_psid);
             await sendMessage(sender_psid, response5);
+            await sendTypingOff(sender_psid);
+
 
             await markMessageSeen(sender_psid);
             await sendTypingOn(sender_psid);
             await sendMessage(sender_psid, response6);
+            await sendTypingOff(sender_psid);
+
 
             await markMessageSeen(sender_psid);
             await sendTypingOn(sender_psid);
             await sendMessage(sender_psid, response7);
+            await sendTypingOff(sender_psid);
+
 
             resolve("done");
         } catch (e) {
@@ -459,31 +482,44 @@ let sendPubMenu = (sender_psid) => {
             await markMessageSeen(sender_psid);
             await sendTypingOn(sender_psid);
             await sendMessage(sender_psid, response1);
+            await sendTypingOff(sender_psid);
+
 
             await markMessageSeen(sender_psid);
             await sendTypingOn(sender_psid);
             await sendMessage(sender_psid, response2);
+            await sendTypingOff(sender_psid);
+
 
             await markMessageSeen(sender_psid);
             await sendTypingOn(sender_psid);
             await sendMessage(sender_psid, response3);
+            await sendTypingOff(sender_psid);
+
 
             await markMessageSeen(sender_psid);
             await sendTypingOn(sender_psid);
             await sendMessage(sender_psid, response4);
+            await sendTypingOff(sender_psid);
+
 
             await markMessageSeen(sender_psid);
             await sendTypingOn(sender_psid);
             await sendMessage(sender_psid, response5);
+            await sendTypingOff(sender_psid);
 
             
             await markMessageSeen(sender_psid);
             await sendTypingOn(sender_psid);
             await sendMessage(sender_psid, response6);
+            await sendTypingOff(sender_psid);
+
 
             await markMessageSeen(sender_psid);
             await sendTypingOn(sender_psid);
             await sendMessage(sender_psid, response7);
+            await sendTypingOff(sender_psid);
+
             resolve("done");
         } catch (e) {
             reject(e);
@@ -563,6 +599,8 @@ let handleShowRooms = (sender_psid) => {
             await markMessageSeen(sender_psid);
             await sendTypingOn(sender_psid);
             await sendMessage(sender_psid, response);
+            await sendTypingOff(sender_psid);
+
         } catch (e) {
             reject(e);
         }
@@ -604,10 +642,14 @@ let showRoomDetail = (sender_psid) => {
             await markMessageSeen(sender_psid);
             await sendTypingOn(sender_psid);
             await sendMessage(sender_psid, response1);
+            await sendTypingOff(sender_psid);
+
 
             await markMessageSeen(sender_psid);
             await sendTypingOn(sender_psid);
             await sendMessage(sender_psid, response2);
+            await sendTypingOff(sender_psid);
+
 
             resolve("done!");
         }catch (e) {
@@ -671,6 +713,8 @@ try{
             await markMessageSeen(sender_psid);
             await sendTypingOn(sender_psid);
             await sendMessage(sender_psid, response);
+            await sendTypingOff(sender_psid);
+
         }catch(e){
             reject(e)
         }
@@ -716,10 +760,14 @@ let sendSalad = (sender_psid) => {
             await markMessageSeen(sender_psid);
             await sendTypingOn(sender_psid);
             await sendMessage(sender_psid, response1);
+            await sendTypingOff(sender_psid);
+
 
             await markMessageSeen(sender_psid);
             await sendTypingOn(sender_psid);
             await sendMessage(sender_psid, response2);
+            await sendTypingOff(sender_psid);
+
 
             resolve("done");
         }catch (e) {
@@ -768,11 +816,14 @@ let sendFish = (sender_psid) => {
  await markMessageSeen(sender_psid);
             await sendTypingOn(sender_psid);
             await sendMessage(sender_psid, response1);
+            await sendTypingOff(sender_psid);
+
 
 
             await markMessageSeen(sender_psid);
             await sendTypingOn(sender_psid);
             await sendMessage(sender_psid, response2);
+            await sendTypingOff(sender_psid);
 
             resolve("done");
         }catch (e) {
@@ -821,10 +872,14 @@ let sendClassic = (sender_psid) => {
  await markMessageSeen(sender_psid);
             await sendTypingOn(sender_psid);
             await sendMessage(sender_psid, response1);
+            await sendTypingOff(sender_psid);
+
 
             await markMessageSeen(sender_psid);
             await sendTypingOn(sender_psid);
             await sendMessage(sender_psid, response2);
+            await sendTypingOff(sender_psid);
+
 
             resolve("done");
         }catch (e) {
@@ -841,6 +896,8 @@ let handleReservation = (sender_psid) => {
             await markMessageSeen(sender_psid);
             await sendTypingOn(sender_psid);
             await sendMessage(sender_psid, response);
+            await sendTypingOff(sender_psid);
+
             
             // await markMessageSeen(sender_psid);
             // await sendTypingOn(sender_psid);
@@ -966,10 +1023,14 @@ let sendMessageDoneReserveTable = async (sender_psid) => {
         await markMessageSeen(sender_psid);
         await sendTypingOn(sender_psid);
         await sendMessage(sender_psid, response);
+        await sendTypingOff(sender_psid);
+
 
         await markMessageSeen(sender_psid);
         await sendTypingOn(sender_psid);
         await sendMessage(sender_psid, response2);
+        await sendTypingOff(sender_psid);
+
     } catch (e) {
         console.log(e);
     }
@@ -1015,10 +1076,14 @@ let response2 = {
 await markMessageSeen(sender_psid);
             await sendTypingOn(sender_psid);
          await sendMessage(sender_psid, response1);
+         await sendTypingOff(sender_psid);
+
 
          await markMessageSeen(sender_psid);
          await sendTypingOn(sender_psid);
          await sendMessage(sender_psid, response2);
+         await sendTypingOff(sender_psid);
+
             resolve("done");
         } catch (e) {
             reject(e);
@@ -1057,6 +1122,8 @@ let sendMessageDefaultForTheBot = (sender_psid) => {
             await markMessageSeen(sender_psid);
             await sendTypingOn(sender_psid);
             await sendMessage(sender_psid, response2);
+            await sendTypingOff(sender_psid);
+
             resolve("done");
         }catch (e) {
             reject(e);
@@ -1071,6 +1138,8 @@ let response1 = {
 }
             await sendTypingOn(sender_psid);
             await sendMessage(sender_psid, response1);
+            await sendTypingOff(sender_psid);
+
             resolve("done");
         }catch (e) {
             reject(e);
@@ -1086,6 +1155,8 @@ let response1 = {
 await markMessageSeen(sender_psid);
             await sendTypingOn(sender_psid);
             await sendMessage(sender_psid, response1);
+            await sendTypingOff(sender_psid);
+
             resolve("done");
         }catch (e) {
             reject(e);
@@ -1262,6 +1333,7 @@ module.exports = {
         sendMessageAskingPhoneNumber:sendMessageAskingPhoneNumber,
         sendMessageDoneReserveTable:sendMessageDoneReserveTable,
         sendTypingOn:sendTypingOn,
+        sendTypingOff:sendTypingOff,
         markMessageSeen:markMessageSeen,
         sendNotificationToTelegram:sendNotificationToTelegram,
         sendMessageDefaultForTheBot:sendMessageDefaultForTheBot,
