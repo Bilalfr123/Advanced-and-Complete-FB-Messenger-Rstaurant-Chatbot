@@ -62,12 +62,14 @@ let sendResponseWelcomeNewCustomer = (sender_psid) => {
             await markMessageSeen(sender_psid);
             await sendTypingOn(sender_psid);
             await sendMessage(sender_psid, response_first);
-
-
+            await sendTypingOff(sender_psid);
+            
+            
             await markMessageSeen(sender_psid);
             await sendTypingOn(sender_psid);
             //send a image with button view main menu
             await sendMessage(sender_psid, response_second);
+            await sendTypingOff(sender_psid);
 
             resolve("done!")
         } catch (e) {
@@ -197,7 +199,7 @@ let sendMainMenu = (sender_psid)=>{
          
 
             //send a image with button view main menu
-            await markMessageSeen(sender_psid)
+            // await markMessageSeen(sender_psid)
             await sendTypingOn(sender_psid);
             await sendMessage(sender_psid, response_second);
 
@@ -291,6 +293,8 @@ let sendLunchMenu = (sender_psid) => {
             await markMessageSeen(sender_psid);
             await sendTypingOn(sender_psid);
         await sendMessage(sender_psid, response);
+        await sendTypingOff(sender_psid);
+
             resolve("done");
         } catch (e) {
             reject(e);
@@ -1128,6 +1132,34 @@ let sendTypingOn = (sender_psid) => {
                    "id": sender_psid
                },
                "sender_action":"typing_on"
+           };
+
+           // Send the HTTP request to the Messenger Platform
+           request({
+               "uri": "https://graph.facebook.com/v6.0/me/messages",
+               "qs": { "access_token": PAGE_ACCESS_TOKEN },
+               "method": "POST",
+               "json": request_body
+           }, (err, res, body) => {
+               if (!err) {
+                   resolve('done!')
+               } else {
+                   reject("Unable to send message:" + err);
+               }
+           });
+       } catch (e) {
+           reject(e);
+       }
+    });
+};
+let sendTypingOff = (sender_psid) => {
+    return new Promise ((resolve, reject) => {
+       try{
+           let request_body = {
+               "recipient": {
+                   "id": sender_psid
+               },
+               "sender_action":"typing_off"
            };
 
            // Send the HTTP request to the Messenger Platform
