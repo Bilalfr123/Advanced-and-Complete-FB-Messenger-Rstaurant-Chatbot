@@ -22,10 +22,10 @@ const PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
 //         });
 //     });
 // };
-let sendResponseWelcomeNewCustomer = (username,sender_psid) => {
+let sendResponseWelcomeNewCustomer = (sender_psid) => {
     return new Promise(async (resolve, reject) => {
         try {
-            let response_first = { "text": `Welcome ${username}, to Dark's Restaurant` };
+            let response_first = { "text": `Welcome Caravn Rabas, to Dark's Restaurant` };
             let response_second = {
                 "attachment": {
                     "type": "template",
@@ -1059,11 +1059,11 @@ let sendMessageDefaultForTheBot = (sender_psid) => {
         }
     });
 };
-let sendUsername = (username,sender_psid) => {
+let sendUsername = (sender_psid) => {
     return new Promise (async (resolve, reject) => {
         try{
 let response1 = {
-    'text' : `Hey, i know your name is ${username}`
+    'text' : `Hey, i know your name is Caravn Rabas`
 }
             await sendTypingOn(sender_psid);
             await sendMessage(sender_psid, response1);
@@ -1233,7 +1233,7 @@ module.exports = {
         markMessageSeen:markMessageSeen,
         sendNotificationToTelegram:sendNotificationToTelegram,
         sendMessageDefaultForTheBot:sendMessageDefaultForTheBot,
-        // sendUsername:sendUsername,
+        sendUsername:sendUsername,
         sendStopAbuse:sendStopAbuse,
         livechat:livechat
 };

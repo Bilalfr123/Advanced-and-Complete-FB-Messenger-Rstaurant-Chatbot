@@ -129,10 +129,9 @@ let handleMessage =async (sender_psid, message) => {
                     if(text.includes('main menu') || text.includes('menu main')){
                         await chatBotService.sendMainMenu(sender_psid);
                     }
-                //   else  if(text.includes('name')){
-                //         let username = await chatBotService.getFacebookUsername(sender_psid);
-                //         await chatBotService.sendUsername(username, sender_psid);
-                //     }
+                    if(text.includes('name')){
+                        await chatBotService.sendUsername( sender_psid);
+                    }
                   else  if(text.includes('fuck')){
                         await chatBotService.sendStopAbuse(sender_psid);
                     }
@@ -234,11 +233,8 @@ let handlePostback = async(sender_psid, received_postback) => {
         response = { "text": "Oops, try sending another image." }
     }
      else if (payload === 'GET_STARTED_PAYLOAD') {
-          //get facebook username
-        //   let username = await chatBotService.getFacebookUsername(sender_psid);
-        //   user.name = username;
 
-          //send welcome response to users
+
 
           await chatBotService.sendResponseWelcomeNewCustomer( sender_psid);
     }
