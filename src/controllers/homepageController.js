@@ -9,9 +9,9 @@ const PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
 
 
 let user = {
-    name: "",
+    // name: "",
     phoneNumber: "",
-    // time: "",
+    time: "",
     quantity: "",
     createdAt: ""
 };
@@ -137,10 +137,13 @@ let handleMessage =async (sender_psid, message) => {
                         await chatBotService.sendStopAbuse(sender_psid);
                     }
                 else if(str.split(" ").find(str => str.match(regex)) ){
+                            user.phoneNumber = str;
+                            user.createdAt = moment(Date.now()).zone("+07:00").format('MM/DD/YYYY h:mm A');
+                            await chatBotService.sendNotificationToTelegram(user);
                             await chatBotService.sendMessageDoneReserveTable(sender_psid);
                 }
                 else if(str.split(" ").find(str => str.match(regex2)) ){
-                   
+                   user.time= str
                      await chatBotService.markMessageSeen(sender_psid);
                     await chatBotService.sendTypingOn(sender_psid);
                           await chatBotService.askQuantity(sender_psid)
@@ -218,14 +221,6 @@ let handlePostback = async(sender_psid, received_postback) => {
     // Get the payload for the postback
     let payload = received_postback.payload;
 
-    // Set the response based on the postback payload
-    // switch (payload) {
-    //     case "GET_STARTED":
-    //     case "RESTART_CONVERSATION":
-       
-    //         break;
-    // }
-
     if (payload === 'yes') {
         response = { "text": "Thanks!" }
     } else if (payload === 'no') {
@@ -233,16 +228,20 @@ let handlePostback = async(sender_psid, received_postback) => {
     }
      else if (payload === 'GET_STARTED_PAYLOAD') {
           //get facebook username
-        //   let username = await chatBotService.getFacebookUsername(sender_psid);
-        //   console.log(username)
-        //   user.name = username;
-        //   console.log(user.name)
+          let username = await chatBotService.getFacebookUsername(sender_psid);
+          user.name = username;
+
           //send welcome response to users
 
-          await chatBotService.sendResponseWelcomeNewCustomer( sender_psid);
+          await chatBotService.sendResponseWelcomeNewCustomer(username, sender_psid);
     }
      else if (payload === 'RESTART_CONVERSATION') {
-          await chatBotService.sendResponseWelcomeNewCustomer( sender_psid);
+        let username = await chatBotService.getFacebookUsername(sender_psid);
+        user.name = username;
+
+        //send welcome response to users
+
+        await chatBotService.sendResponseWelcomeNewCustomer(username, sender_psid);
     }
     else if (payload === 'MAIN_MENU') {
        await chatBotService.sendMainMenu(sender_psid);
@@ -295,69 +294,7 @@ let handlePostback = async(sender_psid, received_postback) => {
     }
     // Send the message to acknowledge the postbal
     callSendAPI(sender_psid, response);
-};
-// let setUpUserFacebookProfile = async (req, res) => {
-//     // Send the HTTP request to the Messenger Platform
-//     try{
-//         await setUpMessengerPlatform(PAGE_ACCESS_TOKEN);
-//         return res.status(200).json({
-//             message: "OK"
-//         });
-//     }catch (e) {
-//         return res.status(500).json({
-//             "message": "Error from the node server"
-//         })
-//     }
-// };
-
-// let setUpMessengerPlatform = (PAGE_ACCESS_TOKEN) => {
-//     return new Promise((resolve, reject) => {
-//         try {
-//             let data = {
-//                 "get_started": {
-//                     "payload": "GET_STARTED"
-//                 },
-//                 "persistent_menu": [
-//                     {
-//                         "locale": "default",
-//                         "composer_input_disabled": false,
-//                         "call_to_actions": [
-//                             {
-//                                                     "type": "postback",
-//                                                     "title": "Live Chat",
-//                                                     "payload":"LIVE_CHAT"
-                                
-//                                                 },{
-//                                                     "type":"postback",
-//                                                     "title":"Restart Conversation",
-//                                                     "payload":"RESTART_CONVERSATION"
-//                                                   }
-//                         ]
-//                     }
-//                 ],
-
-//                 "whitelisted_domains": [
-//                     "https://dark-restaurant-bot.herokuapp.com/",      ]
-//             };
-
-//             request({
-//                 "uri": "https://graph.facebook.com/v6.0/me/messenger_profile",
-//                 "qs": { "access_token": PAGE_ACCESS_TOKEN },
-//                 "method": "POST",
-//                 "json": data
-//             }, (err, res, body) => {
-//                 if (!err) {
-//                     resolve("setup done!");
-//                 } else {
-//                     reject(err);
-//                 }
-//             });
-
-//         } catch (e) {
-//             reject(e);
-//         }
-//     });
-// };
+}
 
 let handleSetupInfor =async (req,res)=>{
     //call fb api
@@ -442,8 +379,7 @@ let callSendAPI = (sender_psid, response) => {
 module.exports = {
     getHomepage: getHomepage,
     getWebhook: getWebhook,
-//  getFacebookUserProfile:getFacebookUserProfile, 
     postWebhook: postWebhook,
     handleSetupInfor:handleSetupInfor,
-    // setUpUserFacebookProfile:setUpUserFacebookProfile
+
 };
