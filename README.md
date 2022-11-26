@@ -1,8 +1,6 @@
 # quickstart-node.js-project-with-messenger-platform
 A  quick start node.js project for buiding a chatbot with Facebook Messenger Platform
 
-### Want to build awesome bots with Node.js, watch my tutorial: https://www.youtube.com/playlist?list=PLNOjHC_BXrfB8DcOCHtKPWPMl4t9PG5cI
-
 
 ### How to setup this project?
 
@@ -14,10 +12,3 @@ A  quick start node.js project for buiding a chatbot with Facebook Messenger Pla
 #### Remember to update the config variables on Heroku as well.
 #### 6. Enjoy!
 
-
-### Find me here:
-- Youtube Channel: https://bit.ly/subscribe-haryphamdev
-- Facebook Fanpage: https://facebook.com/haryphamdev
-- Patreon: https://www.patreon.com/haryphamdev
-- Twitter: https://twitter.com/haryphamdev
-- GitHub: https://github.com/haryphamdev
